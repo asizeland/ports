@@ -1,0 +1,25 @@
+name = "packaging"
+version = "24.2"
+category = "dev-python"
+
+[dependencies]
+runtime = ["python3"]
+build = ["python3"]
+
+[[source]]
+url = "https://files.pythonhosted.org/packages/source/p/packaging/packaging-24.2.tar.gz"
+sha256 = "c228a6dc5e932d346bc5739379109d49e8853dd8223571c7c5b55260edc0b97f"
+
+[build]
+system = "custom"
+
+[scripts]
+build = '''
+tar xzf packaging-24.2.tar.gz
+'''
+install = '''
+DEST="$PKGDIR/usr/lib/python3.13/site-packages"
+mkdir -p "$DEST"
+cp -r packaging-24.2/src/packaging "$DEST/"
+python3 -m compileall -q "$DEST/packaging"
+'''

@@ -1,0 +1,15 @@
+name = "xkeyboard-config"
+version = "2.44"
+category = "x11-misc"
+
+[dependencies]
+runtime = ["xkbcomp"]
+build = ["meson", "ninja", "python3", "xkbcomp"]
+
+[[source]]
+url = "https://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-2.44.tar.xz"
+sha256 = "54d2c33eeebb031d48fa590c543e54c9bcbd0f00386ebc6489b2f47a0da4342a"
+
+[build]
+system = "meson"
+configure_args = ["-Dxkb-base=/usr/share/X11/xkb", "-Dxorg-rules-symlinks=true", "-Dnls=false"]

@@ -1,0 +1,14 @@
+name = "xtrans"
+version = "1.5.2"
+category = "x11-libs"
+
+[dependencies]
+build = ["xorgproto", "pkgconf"]
+
+[[source]]
+url = "https://www.x.org/releases/individual/lib/xtrans-1.5.2.tar.xz"
+sha256 = "5c5cbfe34764a9131d048f03c31c19e57fb4c682d67713eab6a65541b4dff86c"
+
+[build]
+system = "autotools"
+configure_args = ["--disable-static", "--disable-docs"]

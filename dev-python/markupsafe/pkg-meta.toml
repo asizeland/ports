@@ -1,0 +1,25 @@
+name = "markupsafe"
+version = "3.0.2"
+category = "dev-python"
+
+[dependencies]
+runtime = ["python3"]
+build = ["python3"]
+
+[[source]]
+url = "https://files.pythonhosted.org/packages/source/M/MarkupSafe/markupsafe-3.0.2.tar.gz"
+sha256 = "ee55d3edf80167e48ea11a923c7386f4669df67d7994554387f84e7d8b0a2bf0"
+
+[build]
+system = "custom"
+
+[scripts]
+build = '''
+tar xzf markupsafe-3.0.2.tar.gz
+'''
+install = '''
+DEST="$PKGDIR/usr/lib/python3.13/site-packages"
+mkdir -p "$DEST"
+cp -r markupsafe-3.0.2/src/markupsafe "$DEST/"
+python3 -m compileall -q "$DEST/markupsafe"
+'''

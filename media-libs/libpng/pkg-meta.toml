@@ -1,0 +1,16 @@
+name = "libpng"
+version = "1.6.47"
+category = "media-libs"
+
+[dependencies]
+link = ["zlib"]
+runtime = ["glibc", "zlib"]
+build = ["pkgconf"]
+
+[[source]]
+url = "https://download.sourceforge.net/libpng/libpng-1.6.47.tar.xz"
+sha256 = "b213cb381fbb1175327bd708a77aab708a05adde7b471bc267bd15ac99893631"
+
+[build]
+system = "autotools"
+configure_args = ["--disable-static"]

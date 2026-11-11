@@ -1,0 +1,16 @@
+name = "harfbuzz"
+version = "10.4.0"
+category = "media-libs"
+
+[dependencies]
+link = ["glib", "freetype"]
+runtime = ["glibc", "glib", "freetype"]
+build = ["meson", "ninja", "python3", "pkgconf"]
+
+[[source]]
+url = "https://github.com/harfbuzz/harfbuzz/releases/download/10.4.0/harfbuzz-10.4.0.tar.xz"
+sha256 = "480b6d25014169300669aa1fc39fb356c142d5028324ea52b3a27648b9beaad8"
+
+[build]
+system = "meson"
+configure_args = ["-Dglib=enabled", "-Dgobject=enabled", "-Dfreetype=enabled", "-Dcairo=disabled", "-Dchafa=disabled", "-Dicu=disabled", "-Dgraphite2=disabled", "-Dtests=disabled", "-Dintrospection=disabled", "-Ddocs=disabled", "-Dutilities=disabled"]

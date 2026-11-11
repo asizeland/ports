@@ -1,0 +1,16 @@
+name = "libXxf86vm"
+version = "1.1.6"
+category = "x11-libs"
+
+[dependencies]
+link = ["libX11", "libXext"]
+runtime = ["glibc", "libX11", "libXext"]
+build = ["xorgproto", "pkgconf"]
+
+[[source]]
+url = "https://www.x.org/releases/individual/lib/libXxf86vm-1.1.6.tar.xz"
+sha256 = "96af414c73ce1d5449ad04be7f9f27fa8330f844b6dda843ef22e3e1befb3ee3"
+
+[build]
+system = "autotools"
+configure_args = ["--disable-static"]

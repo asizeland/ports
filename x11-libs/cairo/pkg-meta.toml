@@ -1,0 +1,16 @@
+name = "cairo"
+version = "1.18.4"
+category = "x11-libs"
+
+[dependencies]
+link = ["fontconfig", "freetype", "libpng", "pixman", "zlib", "libX11", "libXext", "libXrender", "libxcb", "glib"]
+runtime = ["glibc", "fontconfig", "freetype", "libpng", "pixman", "zlib", "libX11", "libXext", "libXrender", "libxcb", "glib"]
+build = ["meson", "ninja", "python3", "pkgconf", "xorgproto"]
+
+[[source]]
+url = "https://www.cairographics.org/releases/cairo-1.18.4.tar.xz"
+sha256 = "445ed8208a6e4823de1226a74ca319d3600e83f6369f99b14265006599c32ccb"
+
+[build]
+system = "meson"
+configure_args = ["-Dfontconfig=enabled", "-Dfreetype=enabled", "-Dpng=enabled", "-Dquartz=disabled", "-Dtee=enabled", "-Dxcb=enabled", "-Dxlib=enabled", "-Dxlib-xcb=enabled", "-Dzlib=enabled", "-Dtests=disabled", "-Dlzo=disabled", "-Dglib=enabled", "-Dspectre=disabled", "-Dsymbol-lookup=disabled", "-Dgtk_doc=false"]

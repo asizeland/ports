@@ -1,0 +1,16 @@
+name = "fontconfig"
+version = "2.16.0"
+category = "media-libs"
+
+[dependencies]
+link = ["freetype", "expat"]
+runtime = ["glibc", "freetype", "expat"]
+build = ["pkgconf", "gperf"]
+
+[[source]]
+url = "https://www.freedesktop.org/software/fontconfig/release/fontconfig-2.16.0.tar.xz"
+sha256 = "6a33dc555cc9ba8b10caf7695878ef134eeb36d0af366041f639b1da9b6ed220"
+
+[build]
+system = "autotools"
+configure_args = ["--disable-static", "--disable-docs", "--disable-nls", "--sysconfdir=/etc", "--localstatedir=/var", "--with-default-fonts=/usr/share/fonts", "--with-add-fonts=/usr/local/share/fonts"]

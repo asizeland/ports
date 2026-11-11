@@ -1,0 +1,25 @@
+name = "mako"
+version = "1.3.9"
+category = "dev-python"
+
+[dependencies]
+runtime = ["python3", "markupsafe"]
+build = ["python3", "markupsafe"]
+
+[[source]]
+url = "https://files.pythonhosted.org/packages/source/M/Mako/mako-1.3.9.tar.gz"
+sha256 = "b5d65ff3462870feec922dbccf38f6efb44e5714d7b593a656be86663d8600ac"
+
+[build]
+system = "custom"
+
+[scripts]
+build = '''
+tar xzf mako-1.3.9.tar.gz
+'''
+install = '''
+DEST="$PKGDIR/usr/lib/python3.13/site-packages"
+mkdir -p "$DEST"
+cp -r mako-1.3.9/mako "$DEST/"
+python3 -m compileall -q "$DEST/mako"
+'''

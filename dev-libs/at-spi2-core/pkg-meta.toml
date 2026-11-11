@@ -1,0 +1,16 @@
+name = "at-spi2-core"
+version = "2.54.1"
+category = "dev-libs"
+
+[dependencies]
+link = ["glib", "dbus", "libxml2", "libX11", "libXtst", "libXi"]
+runtime = ["glibc", "glib", "dbus", "libxml2", "libX11", "libXtst", "libXi"]
+build = ["meson", "ninja", "python3", "pkgconf", "gettext", "libxml2", "xorgproto"]
+
+[[source]]
+url = "https://download.gnome.org/sources/at-spi2-core/2.54/at-spi2-core-2.54.1.tar.xz"
+sha256 = "f0729e5c8765feb1969bb6c1fba18afa2582126b0359aa75a173fda1acf93c4c"
+
+[build]
+system = "meson"
+configure_args = ["-Duse_systemd=false", "-Dgtk2_atk_adaptor=false", "-Ddocs=false", "-Dintrospection=disabled", "-Dx11=enabled", "-Ddbus_services_dir=/usr/share/dbus-1/services", "-Ddbus_daemon=/usr/bin/dbus-daemon"]

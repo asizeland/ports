@@ -1,0 +1,14 @@
+name = "font-alias"
+version = "1.0.5"
+category = "media-fonts"
+
+[dependencies]
+build = ["font-util"]
+
+[[source]]
+url = "https://www.x.org/releases/individual/font/font-alias-1.0.5.tar.xz"
+sha256 = "9f89e217bb73e0e3636a0a493fbf8b7c995156e0c53d9a0476d201b67c2d6b6e"
+
+[build]
+system = "autotools"
+configure_args = ["--with-fontrootdir=/usr/share/fonts"]

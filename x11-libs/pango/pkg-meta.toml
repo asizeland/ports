@@ -1,0 +1,16 @@
+name = "pango"
+version = "1.56.3"
+category = "x11-libs"
+
+[dependencies]
+link = ["cairo", "fontconfig", "freetype", "fribidi", "glib", "harfbuzz"]
+runtime = ["glibc", "cairo", "fontconfig", "freetype", "fribidi", "glib", "harfbuzz"]
+build = ["meson", "ninja", "python3", "pkgconf", "xorgproto"]
+
+[[source]]
+url = "https://download.gnome.org/sources/pango/1.56/pango-1.56.3.tar.xz"
+sha256 = "2606252bc25cd8d24e1b7f7e92c3a272b37acd6734347b73b47a482834ba2491"
+
+[build]
+system = "meson"
+configure_args = ["-Dcairo=enabled", "-Dfontconfig=enabled", "-Dfreetype=enabled", "-Dxft=disabled", "-Dlibthai=disabled", "-Dsysprof=disabled", "-Dintrospection=disabled", "-Dbuild-testsuite=false", "-Dbuild-examples=false", "-Dman-pages=false", "-Ddocumentation=false"]

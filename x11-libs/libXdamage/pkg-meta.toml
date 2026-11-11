@@ -1,0 +1,16 @@
+name = "libXdamage"
+version = "1.1.6"
+category = "x11-libs"
+
+[dependencies]
+link = ["libX11", "libXfixes"]
+runtime = ["glibc", "libX11", "libXfixes"]
+build = ["xorgproto", "pkgconf"]
+
+[[source]]
+url = "https://www.x.org/releases/individual/lib/libXdamage-1.1.6.tar.xz"
+sha256 = "52733c1f5262fca35f64e7d5060c6fcd81a880ba8e1e65c9621cf0727afb5d11"
+
+[build]
+system = "autotools"
+configure_args = ["--disable-static"]

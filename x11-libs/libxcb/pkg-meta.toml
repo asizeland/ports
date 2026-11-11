@@ -1,0 +1,16 @@
+name = "libxcb"
+version = "1.17.0"
+category = "x11-libs"
+
+[dependencies]
+link = ["libXau", "libXdmcp"]
+runtime = ["glibc", "libXau", "libXdmcp"]
+build = ["xcb-proto", "xorgproto", "python3", "pkgconf"]
+
+[[source]]
+url = "https://www.x.org/releases/individual/lib/libxcb-1.17.0.tar.xz"
+sha256 = "599ebf9996710fea71622e6e184f3a8ad5b43d0e5fa8c4e407123c88a59a6d55"
+
+[build]
+system = "autotools"
+configure_args = ["--disable-static", "--disable-devel-docs", "--without-doxygen"]

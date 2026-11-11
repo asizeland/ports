@@ -1,0 +1,16 @@
+name = "libX11"
+version = "1.8.12"
+category = "x11-libs"
+
+[dependencies]
+link = ["libxcb"]
+runtime = ["glibc", "libxcb"]
+build = ["xorgproto", "xorg-macros", "xtrans", "libxcb", "pkgconf"]
+
+[[source]]
+url = "https://www.x.org/releases/individual/lib/libX11-1.8.12.tar.xz"
+sha256 = "fa026f9bb0124f4d6c808f9aef4057aad65e7b35d8ff43951cef0abe06bb9a9a"
+
+[build]
+system = "autotools"
+configure_args = ["--disable-static", "--disable-specs"]

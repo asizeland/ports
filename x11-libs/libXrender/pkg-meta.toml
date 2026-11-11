@@ -1,0 +1,16 @@
+name = "libXrender"
+version = "0.9.12"
+category = "x11-libs"
+
+[dependencies]
+link = ["libX11"]
+runtime = ["glibc", "libX11"]
+build = ["xorgproto", "pkgconf"]
+
+[[source]]
+url = "https://www.x.org/releases/individual/lib/libXrender-0.9.12.tar.xz"
+sha256 = "b832128da48b39c8d608224481743403ad1691bf4e554e4be9c174df171d1b97"
+
+[build]
+system = "autotools"
+configure_args = ["--disable-static"]

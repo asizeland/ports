@@ -1,0 +1,16 @@
+name = "gtk3"
+version = "3.24.43"
+category = "x11-libs"
+
+[dependencies]
+link = ["at-spi2-core", "cairo", "gdk-pixbuf", "glib", "pango", "fribidi", "fontconfig", "harfbuzz", "freetype", "libepoxy", "libxkbcommon", "libX11", "libXext", "libXrender", "libXi", "libXfixes", "libXcursor", "libXdamage", "libXcomposite", "libXrandr", "libXinerama", "libXtst"]
+runtime = ["glibc", "at-spi2-core", "cairo", "gdk-pixbuf", "glib", "pango", "fribidi", "fontconfig", "harfbuzz", "freetype", "libepoxy", "libxkbcommon", "libX11", "libXext", "libXrender", "libXi", "libXfixes", "libXcursor", "libXdamage", "libXcomposite", "libXrandr", "libXinerama", "libXtst", "shared-mime-info", "hicolor-icon-theme"]
+build = ["meson", "ninja", "python3", "pkgconf", "gettext", "xorgproto"]
+
+[[source]]
+url = "https://download.gnome.org/sources/gtk+/3.24/gtk+-3.24.43.tar.xz"
+sha256 = "7e04f0648515034b806b74ae5d774d87cffb1a2a96c468cb5be476d51bf2f3c7"
+
+[build]
+system = "meson"
+configure_args = ["-Dx11_backend=true", "-Dwayland_backend=false", "-Dbroadway_backend=false", "-Dwin32_backend=false", "-Dquartz_backend=false", "-Dxinerama=yes", "-Dcloudproviders=false", "-Dprofiler=false", "-Dtracker3=false", "-Dprint_backends=file,lpr", "-Dcolord=no", "-Dintrospection=false", "-Dgtk_doc=false", "-Dman=false", "-Ddemos=false", "-Dexamples=false", "-Dtests=false", "-Dinstalled_tests=false", "-Dbuiltin_immodules=all"]

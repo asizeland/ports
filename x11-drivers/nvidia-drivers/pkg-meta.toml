@@ -8,7 +8,7 @@ sha256 = "1a38ecd538a2da6232a7330184063af59e9fc946c908cca555bd07909848b9f0"
 
 [dependencies]
 link = ["glibc", "gcc", "linux"]
-runtime = ["glibc", "gcc", "linux", "kmod", "dkms"]
+runtime = ["glibc", "gcc", "linux", "kmod", "dkms", "libglvnd", "xorg-server"]
 build = ["gcc", "make", "binutils"]
 
 [build]
@@ -64,6 +64,17 @@ ln -s "libcuda.so.$V" "$PKGDIR/usr/lib/libcuda.so.1"
 ln -s "libnvidia-opencl.so.$V" "$PKGDIR/usr/lib/libnvidia-opencl.so.1"
 ln -s "libGLX_nvidia.so.$V" "$PKGDIR/usr/lib/libGLX_nvidia.so.0"
 ln -s "libEGL_nvidia.so.$V" "$PKGDIR/usr/lib/libEGL_nvidia.so.0"
+
+install -Dm755 "$D/nvidia_drv.so" \
+    "$PKGDIR/usr/lib/xorg/modules/drivers/nvidia_drv.so"
+install -Dm755 "$D/libglxserver_nvidia.so.$V" \
+    "$PKGDIR/usr/lib/xorg/modules/extensions/libglxserver_nvidia.so.$V"
+ln -s "libglxserver_nvidia.so.$V" \
+    "$PKGDIR/usr/lib/xorg/modules/extensions/libglxserver_nvidia.so"
+install -Dm644 "$D/nvidia-drm-outputclass.conf" \
+    "$PKGDIR/usr/share/X11/xorg.conf.d/10-nvidia.conf"
+install -Dm644 "$D/nvidia-application-profiles-$V-rc" \
+    "$PKGDIR/usr/share/nvidia/nvidia-application-profiles-rc"
 
 install -Dm755 "$D/nvidia-smi" "$PKGDIR/usr/bin/nvidia-smi"
 install -Dm755 "$D/nvidia-modprobe" "$PKGDIR/usr/bin/nvidia-modprobe"

@@ -1,0 +1,14 @@
+name = "bdftopcf"
+version = "1.1"
+category = "x11-apps"
+
+[dependencies]
+runtime = ["glibc"]
+build = ["xorgproto", "xorg-macros", "pkgconf"]
+
+[[source]]
+url = "https://www.x.org/releases/individual/app/bdftopcf-1.1.tar.bz2"
+sha256 = "4b4df05fc53f1e98993638d6f7e178d95b31745c4568cee407e167491fd311a2"
+
+[build]
+system = "autotools"

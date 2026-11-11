@@ -1,0 +1,24 @@
+name = "dejavu-fonts"
+version = "2.37"
+category = "media-fonts"
+
+[dependencies]
+runtime = ["fontconfig"]
+
+[[source]]
+url = "https://github.com/dejavu-fonts/dejavu-fonts/releases/download/version_2_37/dejavu-fonts-ttf-2.37.tar.bz2"
+sha256 = "fa9ca4d13871dd122f61258a80d01751d603b4d3ee14095d65453b4e846e17d7"
+
+[build]
+system = "custom"
+
+[scripts]
+build = '''
+tar xjf dejavu-fonts-ttf-2.37.tar.bz2
+'''
+install = '''
+mkdir -p "$PKGDIR/usr/share/fonts/TTF"
+cp dejavu-fonts-ttf-2.37/ttf/*.ttf "$PKGDIR/usr/share/fonts/TTF/"
+mkdir -p "$PKGDIR/usr/share/doc/dejavu-fonts"
+cp dejavu-fonts-ttf-2.37/LICENSE "$PKGDIR/usr/share/doc/dejavu-fonts/"
+'''

@@ -1,0 +1,16 @@
+name = "xorg-server"
+version = "21.1.18"
+category = "x11-base"
+
+[dependencies]
+link = ["libXau", "libXdmcp", "libxcb", "libXfont2", "pixman", "libxkbfile", "libpciaccess", "libdrm", "libepoxy", "libglvnd", "libxshmfence", "mesa", "eudev", "openssl", "libxcvt"]
+runtime = ["glibc", "libXau", "libXdmcp", "libxcb", "libXfont2", "pixman", "libxkbfile", "libpciaccess", "libdrm", "libepoxy", "libglvnd", "libxshmfence", "mesa", "eudev", "openssl", "libxcvt", "xkbcomp", "xkeyboard-config", "font-alias", "font-misc-misc", "font-cursor-misc", "dejavu-fonts"]
+build = ["meson", "ninja", "python3", "pkgconf", "xorgproto", "xtrans", "bison", "flex", "xkbcomp", "mesa"]
+
+[[source]]
+url = "https://www.x.org/releases/individual/xserver/xorg-server-21.1.18.tar.xz"
+sha256 = "c878d1930d87725d4a5bf498c24f4be8130d5b2646a9fd0f2994deff90116352"
+
+[build]
+system = "meson"
+configure_args = ["--buildtype=release", "-Dxorg=true", "-Dxvfb=true", "-Dxephyr=false", "-Dxnest=false", "-Dxwin=false", "-Dxquartz=false", "-Dglamor=true", "-Dglx=true", "-Ddrm=true", "-Ddri1=false", "-Ddri2=true", "-Ddri3=true", "-Dxvmc=false", "-Dsecure-rpc=false", "-Dudev=true", "-Dhal=false", "-Dsystemd_logind=false", "-Dxselinux=false", "-Dlibunwind=false", "-Ddocs=false", "-Ddevel-docs=false", "-Ddtrace=false", "-Dsuid_wrapper=false", "-Dsha1=libcrypto", "-Dmodule_dir=/usr/lib/xorg/modules", "-Ddefault_font_path=/usr/share/fonts/misc,/usr/share/fonts/TTF", "-Dxkb_dir=/usr/share/X11/xkb", "-Dxkb_output_dir=/var/lib/xkb", "-Dxkb_bin_dir=/usr/bin", "-Dlog_dir=/var/log"]

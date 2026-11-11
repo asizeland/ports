@@ -1,0 +1,15 @@
+name = "libevdev"
+version = "1.13.3"
+category = "dev-libs"
+
+[dependencies]
+runtime = ["glibc", "linux-headers"]
+build = ["pkgconf", "linux-headers"]
+
+[[source]]
+url = "https://www.freedesktop.org/software/libevdev/libevdev-1.13.3.tar.xz"
+sha256 = "abf1aace86208eebdd5d3550ffded4c8d73bb405b796d51c389c9d0604cbcfbf"
+
+[build]
+system = "autotools"
+configure_args = ["--disable-static"]

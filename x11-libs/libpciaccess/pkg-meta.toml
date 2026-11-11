@@ -1,0 +1,16 @@
+name = "libpciaccess"
+version = "0.18.1"
+category = "x11-libs"
+
+[dependencies]
+link = ["zlib"]
+runtime = ["glibc", "zlib"]
+build = ["meson", "ninja", "python3", "pkgconf"]
+
+[[source]]
+url = "https://www.x.org/releases/individual/lib/libpciaccess-0.18.1.tar.xz"
+sha256 = "4af43444b38adb5545d0ed1c2ce46d9608cc47b31c2387fc5181656765a6fa76"
+
+[build]
+system = "meson"
+configure_args = ["-Dzlib=enabled"]

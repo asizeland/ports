@@ -1,0 +1,15 @@
+name = "font-cursor-misc"
+version = "1.0.4"
+category = "media-fonts"
+
+[dependencies]
+build = ["font-util", "bdftopcf", "mkfontscale"]
+runtime = ["font-alias"]
+
+[[source]]
+url = "https://www.x.org/releases/individual/font/font-cursor-misc-1.0.4.tar.xz"
+sha256 = "25d9c9595013cb8ca08420509993a6434c917e53ca1fec3f63acd45a19d4f982"
+
+[build]
+system = "autotools"
+configure_args = ["--with-fontrootdir=/usr/share/fonts"]
