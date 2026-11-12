@@ -13,8 +13,9 @@ it against the packaged glibc is the stage-2 bootstrap.
 
 ```
 <category>/<name>/
-  pkg-meta.toml    # metadata, [[source]] pins, [build], and optional [scripts]
+  pkg-meta.toml    # metadata, [[source]] pins, [build], [scripts], typed [hooks]
   watch.toml       # optional upstream-version policy
+  files/           # optional reviewed source patches and other local inputs
 ```
 
 A managed `build.system` (`autotools`, `meson`, `cmake`, or `make`) supplies the
