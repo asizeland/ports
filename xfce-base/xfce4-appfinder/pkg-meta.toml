@@ -1,0 +1,19 @@
+name = "xfce4-appfinder"
+version = "4.20.0"
+category = "xfce-base"
+
+[dependencies]
+link = ["glib", "gtk3", "libxfce4util", "libxfce4ui", "xfconf", "garcon"]
+runtime = ["glibc", "glib", "gtk3", "libxfce4util", "libxfce4ui", "xfconf", "garcon", "desktop-file-utils"]
+build = ["pkgconf", "gettext"]
+
+[hooks]
+operations = ["icon-cache", "desktop-database"]
+
+[[source]]
+url = "https://archive.xfce.org/src/xfce/xfce4-appfinder/4.20/xfce4-appfinder-4.20.0.tar.bz2"
+sha256 = "82ca82f77dc83e285db45438c2fe31df445148aa986ffebf2faabee4af9e7304"
+
+[build]
+system = "autotools"
+configure_args = ["--sysconfdir=/etc", "--disable-static"]

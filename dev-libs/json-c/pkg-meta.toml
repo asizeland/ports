@@ -1,0 +1,30 @@
+name = "json-c"
+version = "0.19"
+category = "dev-libs"
+
+[dependencies]
+runtime = ["glibc"]
+build = ["cmake", "make"]
+
+[[source]]
+url = "https://s3.amazonaws.com/json-c_releases/releases/json-c-0.19.tar.gz"
+sha256 = "37ad0249902e301bd9052bf712e511fcc6acff4ecaad4b5900aad9ce564e26de"
+
+[build]
+system = "custom"
+
+[scripts]
+build = '''
+tar xzf json-c-0.19.tar.gz
+export PATH="/pkg/deps/cmake/usr/bin:/pkg/deps/make/usr/bin:$PATH"
+cmake -S json-c-0.19 -B json-c-build \
+    -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DBUILD_SHARED_LIBS=ON -DBUILD_STATIC_LIBS=OFF -DBUILD_APPS=OFF \
+    -DBUILD_TESTING=OFF -DDISABLE_EXTRA_LIBS=ON -DDISABLE_WERROR=ON
+cmake --build json-c-build
+'''
+install = '''
+export PATH="/pkg/deps/cmake/usr/bin:$PATH"
+DESTDIR="$PKGDIR" cmake --install json-c-build
+'''

@@ -1,0 +1,16 @@
+name = "xcb-util"
+version = "0.4.1"
+category = "x11-libs"
+
+[dependencies]
+link = ["libxcb"]
+runtime = ["glibc", "libxcb"]
+build = ["pkgconf"]
+
+[[source]]
+url = "https://www.x.org/releases/individual/lib/xcb-util-0.4.1.tar.xz"
+sha256 = "5abe3bbbd8e54f0fa3ec945291b7e8fa8cfd3cccc43718f8758430f94126e512"
+
+[build]
+system = "autotools"
+configure_args = ["--disable-static", "--disable-devel-docs", "--without-doxygen"]

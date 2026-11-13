@@ -1,0 +1,15 @@
+name = "libdisplay-info"
+version = "0.3.0"
+category = "media-libs"
+
+[dependencies]
+runtime = ["glibc"]
+build = ["meson", "ninja", "python3", "pkgconf", "hwdata"]
+
+[[source]]
+url = "https://gitlab.freedesktop.org/emersion/libdisplay-info/-/archive/0.3.0/libdisplay-info-0.3.0.tar.gz"
+sha256 = "2b467e3336aec63819d6aca28d7310d3dc7415b2b3a3c3a5aec9d3727053c078"
+
+[build]
+system = "meson"
+configure_args = ["--wrap-mode=nodownload"]

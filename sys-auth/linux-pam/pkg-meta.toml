@@ -1,0 +1,70 @@
+name = "linux-pam"
+version = "1.7.3"
+category = "sys-auth"
+
+[dependencies]
+link = ["libxcrypt"]
+runtime = ["glibc", "libxcrypt"]
+build = ["meson", "ninja", "python3", "pkgconf"]
+
+[[source]]
+url = "https://github.com/linux-pam/linux-pam/releases/download/v1.7.3/Linux-PAM-1.7.3.tar.xz"
+sha256 = "2ce4765fd49df6693771ef2941f81e33d8ee14b94a81a5c7b369aa3b137b85a5"
+
+[build]
+system = "custom"
+
+[scripts]
+build = '''
+tar xJf Linux-PAM-1.7.3.tar.xz
+export PATH="/pkg/deps/meson/usr/bin:/pkg/deps/ninja/usr/bin:/pkg/deps/python3/usr/bin:/pkg/deps/pkgconf/usr/bin:$PATH"
+meson setup Linux-PAM-1.7.3 pam-build \
+    --prefix=/usr --libdir=/usr/lib --sysconfdir=/etc --localstatedir=/var \
+    --buildtype=release \
+    -Dsecuredir=/usr/lib/security -Dsconfigdir=/etc/security \
+    -Di18n=disabled -Ddocs=disabled -Dexamples=false -Dxtests=false \
+    -Daudit=disabled -Deconf=disabled -Dpwaccess=disabled \
+    -Dlogind=disabled -Delogind=disabled -Dselinux=disabled -Dnis=disabled \
+    -Dopenssl=disabled -Dpam_userdb=disabled -Dpam_lastlog=disabled \
+    -Dpam_unix=enabled -Dpam-debug=false -Dread-both-confs=false \
+    -Dsystemdunitdir=/usr/lib/systemd/system
+ninja -C pam-build
+'''
+install = '''
+export PATH="/pkg/deps/ninja/usr/bin:/pkg/deps/python3/usr/bin:$PATH"
+DESTDIR="$PKGDIR" ninja -C pam-build install
+rm -rf "$PKGDIR/usr/lib/systemd"
+chmod 4755 "$PKGDIR/usr/sbin/unix_chkpwd"
+
+# pam_unix is required for every management class; empty passwords and
+# pam_permit are deliberately absent. Unknown services fail closed.
+install -d -m 0755 "$PKGDIR/etc/pam.d"
+cat > "$PKGDIR/etc/pam.d/system-auth" <<'EOF'
+auth     required pam_unix.so
+account  required pam_unix.so
+password required pam_unix.so
+session  required pam_unix.so
+EOF
+cat > "$PKGDIR/etc/pam.d/login" <<'EOF'
+auth     include system-auth
+account  include system-auth
+password include system-auth
+session  include system-auth
+EOF
+cat > "$PKGDIR/etc/pam.d/passwd" <<'EOF'
+password include system-auth
+EOF
+cat > "$PKGDIR/etc/pam.d/su" <<'EOF'
+auth     include system-auth
+account  include system-auth
+session  include system-auth
+EOF
+cat > "$PKGDIR/etc/pam.d/other" <<'EOF'
+auth     required pam_deny.so
+account  required pam_deny.so
+password required pam_deny.so
+session  required pam_deny.so
+EOF
+chmod 0644 "$PKGDIR/etc/pam.d/system-auth" "$PKGDIR/etc/pam.d/login" \
+    "$PKGDIR/etc/pam.d/passwd" "$PKGDIR/etc/pam.d/su" "$PKGDIR/etc/pam.d/other"
+'''

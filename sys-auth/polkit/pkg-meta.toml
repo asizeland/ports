@@ -1,0 +1,52 @@
+name = "polkit"
+version = "128"
+category = "sys-auth"
+
+[dependencies]
+link = ["glib", "duktape", "expat", "linux-pam"]
+runtime = ["glibc", "glib", "duktape", "expat", "linux-pam", "dbus"]
+build = ["meson", "ninja", "python3", "pkgconf"]
+
+[[source]]
+url = "https://github.com/polkit-org/polkit/archive/128/polkit-128.tar.gz"
+sha256 = "6edb06bf1448e49e428f9597a97af6a05d62146dd0b58f86eeaebcee3f5ecfaa"
+
+[build]
+system = "custom"
+
+[scripts]
+build = '''
+tar xzf polkit-128.tar.gz
+export PATH="/pkg/deps/meson/usr/bin:/pkg/deps/ninja/usr/bin:/pkg/deps/python3/usr/bin:/pkg/deps/pkgconf/usr/bin:$PATH"
+meson setup polkit-128 polkit-build \
+    --prefix=/usr --libdir=/usr/lib --sysconfdir=/etc --localstatedir=/var \
+    --buildtype=release \
+    -Dauthfw=pam -Dpam_prefix=/etc/pam.d -Dpam_include=system-auth \
+    -Dos_type=lfs -Dprivileged_group=wheel \
+    -Dsession_tracking=ConsoleKit -Dsystemdsystemunitdir=/usr/lib/systemd/system \
+    -Dpolkitd_user=polkitd -Dintrospection=false -Dtests=false -Dexamples=false \
+    -Dgtk_doc=false -Dman=false -Dgettext=false
+ninja -C polkit-build
+'''
+install = '''
+export PATH="/pkg/deps/ninja/usr/bin:/pkg/deps/python3/usr/bin:$PATH"
+DESTDIR="$PKGDIR" ninja -C polkit-build install
+rm -rf "$PKGDIR/usr/lib/systemd" "$PKGDIR/usr/lib/sysusers.d" "$PKGDIR/usr/lib/tmpfiles.d"
+sed -i '/^SystemdService=/d' "$PKGDIR/usr/share/dbus-1/system-services/org.freedesktop.PolicyKit1.service"
+chmod 4755 "$PKGDIR/usr/bin/pkexec" "$PKGDIR/usr/lib/polkit-1/polkit-agent-helper-1"
+
+mkdir -p "$PKGDIR/etc/init.d"
+cat > "$PKGDIR/etc/init.d/polkit" <<'EOF'
+#!/sbin/openrc-run
+
+supervisor=supervise-daemon
+description="Polkit authorization manager"
+command="/usr/lib/polkit-1/polkitd"
+command_args="--no-debug"
+
+depend() {
+	need dbus
+}
+EOF
+chmod 0755 "$PKGDIR/etc/init.d/polkit"
+'''

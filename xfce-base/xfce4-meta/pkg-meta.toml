@@ -1,0 +1,43 @@
+name = "xfce4-meta"
+version = "4.20.0"
+category = "xfce-base"
+
+[dependencies]
+runtime = [
+    "libxfce4util",
+    "xfconf",
+    "libxfce4ui",
+    "garcon",
+    "exo",
+    "libxfce4windowing",
+    "xfce4-panel",
+    "thunar",
+    "xfce4-appfinder",
+    "xfce4-settings",
+    "xfdesktop",
+    "xfwm4",
+    "xfce4-session",
+    "thunar-volman",
+    "tumbler",
+    "xfce4-power-manager",
+    "xfce4-notifyd",
+    "xfce4-terminal",
+    "xfce4-taskmanager",
+    "xfce4-screensaver",
+    "dbus",
+    "polkit",
+    "udisks",
+    "gvfs",
+    "upower",
+    "iceauth",
+    "xrdb",
+    "desktop-file-utils",
+    "xdg-user-dirs",
+    "shared-mime-info",
+    "hicolor-icon-theme",
+    "dejavu-fonts",
+    "xinit",
+]
+
+[build]
+system = "none"

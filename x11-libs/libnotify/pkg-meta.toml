@@ -1,0 +1,16 @@
+name = "libnotify"
+version = "0.8.9"
+category = "x11-libs"
+
+[dependencies]
+link = ["gdk-pixbuf", "glib"]
+runtime = ["glibc", "gdk-pixbuf", "glib"]
+build = ["meson", "ninja", "python3", "pkgconf"]
+
+[[source]]
+url = "https://download.gnome.org/sources/libnotify/0.8/libnotify-0.8.9.tar.xz"
+sha256 = "c906bb084027ea512f94a60fbfc0cc8d4f17e4b4d525bed370d07a6d8714c923"
+
+[build]
+system = "meson"
+configure_args = ["-Dtests=false", "-Dintrospection=disabled", "-Dman=false", "-Dgtk_doc=false", "-Ddocbook_docs=disabled"]

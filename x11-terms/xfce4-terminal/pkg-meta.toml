@@ -1,0 +1,19 @@
+name = "xfce4-terminal"
+version = "1.2.0"
+category = "x11-terms"
+
+[dependencies]
+link = ["glib", "gtk3", "vte", "pcre2", "libxfce4util", "libxfce4ui", "xfconf", "libX11"]
+runtime = ["glibc", "glib", "gtk3", "vte", "pcre2", "libxfce4util", "libxfce4ui", "xfconf", "libX11", "dbus", "desktop-file-utils"]
+build = ["meson", "ninja", "python3", "pkgconf", "gettext", "xorgproto"]
+
+[hooks]
+operations = ["icon-cache", "desktop-database"]
+
+[[source]]
+url = "https://archive.xfce.org/src/apps/xfce4-terminal/1.2/xfce4-terminal-1.2.0.tar.xz"
+sha256 = "6874c7b975cc3dc3bd636d57ffec723de7458202defe65377593d3a7e0734b94"
+
+[build]
+system = "meson"
+configure_args = ["--sysconfdir=/etc", "-Dx11=enabled", "-Dwayland=disabled", "-Dgtk-layer-shell=disabled", "-Dlibutempter=disabled", "-Ddoc=false"]

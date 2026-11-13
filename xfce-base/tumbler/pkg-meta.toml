@@ -1,0 +1,19 @@
+name = "tumbler"
+version = "4.20.2"
+category = "xfce-base"
+
+[dependencies]
+link = ["glib", "libxfce4util", "gdk-pixbuf", "freetype", "libjpeg", "libpng", "curl"]
+runtime = ["glibc", "glib", "libxfce4util", "gdk-pixbuf", "freetype", "libjpeg", "libpng", "curl", "gtk3", "dbus"]
+build = ["pkgconf", "gettext"]
+
+[hooks]
+operations = ["icon-cache"]
+
+[[source]]
+url = "https://archive.xfce.org/src/xfce/tumbler/4.20/tumbler-4.20.2.tar.bz2"
+sha256 = "aa77fd90a88b83467cd8d2b39d80e4518ba2903d2e4ca50d32d1b96996685015"
+
+[build]
+system = "autotools"
+configure_args = ["--sysconfdir=/etc", "--disable-static", "--disable-gtk-doc", "--enable-cover-thumbnailer", "--enable-font-thumbnailer", "--enable-jpeg-thumbnailer", "--enable-pixbuf-thumbnailer", "--disable-ffmpeg-thumbnailer", "--disable-gstreamer-thumbnailer", "--disable-odf-thumbnailer", "--disable-poppler-thumbnailer", "--disable-raw-thumbnailer", "--enable-xdg-cache", "--enable-desktop-thumbnailer", "--disable-gepub-thumbnailer"]

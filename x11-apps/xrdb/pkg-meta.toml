@@ -1,0 +1,16 @@
+name = "xrdb"
+version = "1.2.3"
+category = "x11-apps"
+
+[dependencies]
+link = ["libX11", "libXmu"]
+runtime = ["glibc", "libX11", "libXmu", "gcc"]
+build = ["xorgproto", "pkgconf"]
+
+[[source]]
+url = "https://www.x.org/releases/individual/app/xrdb-1.2.3.tar.xz"
+sha256 = "c88f560243278c896ce4fc92ae5a45a2b505a316ffa427fe55b02e5d5914c4e4"
+
+[build]
+system = "autotools"
+configure_args = ["--disable-static", "--with-cpp=/usr/bin/cpp"]

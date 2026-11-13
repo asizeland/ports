@@ -1,0 +1,19 @@
+name = "xfce4-taskmanager"
+version = "1.6.0"
+category = "xfce-extra"
+
+[dependencies]
+link = ["glib", "gtk3", "cairo", "libX11", "libXmu", "libwnck", "libxfce4util", "libxfce4ui", "xfconf"]
+runtime = ["glibc", "glib", "gtk3", "cairo", "libX11", "libXmu", "libwnck", "libxfce4util", "libxfce4ui", "xfconf", "desktop-file-utils"]
+build = ["meson", "ninja", "python3", "pkgconf", "gettext", "xorgproto"]
+
+[hooks]
+operations = ["icon-cache", "desktop-database"]
+
+[[source]]
+url = "https://archive.xfce.org/src/apps/xfce4-taskmanager/1.6/xfce4-taskmanager-1.6.0.tar.xz"
+sha256 = "29bdc7840ab8b9025f6c0e456a83a31090d1c9fd9e26b359baa4a4010cfb0b90"
+
+[build]
+system = "meson"
+configure_args = ["--sysconfdir=/etc", "-Dx11=enabled", "-Dwnck=enabled"]

@@ -1,0 +1,19 @@
+name = "thunar-volman"
+version = "4.20.0"
+category = "xfce-base"
+
+[dependencies]
+link = ["glib", "gtk3", "exo", "libxfce4util", "libxfce4ui", "xfconf", "libgudev", "libnotify"]
+runtime = ["glibc", "glib", "gtk3", "exo", "libxfce4util", "libxfce4ui", "xfconf", "libgudev", "libnotify", "thunar", "udisks", "gvfs", "dbus", "desktop-file-utils"]
+build = ["pkgconf", "gettext"]
+
+[hooks]
+operations = ["icon-cache", "desktop-database"]
+
+[[source]]
+url = "https://archive.xfce.org/src/xfce/thunar-volman/4.20/thunar-volman-4.20.0.tar.bz2"
+sha256 = "b0dad852959b515b8fbfd1ed552e362340347d26d5246e7f1b973027131eb1da"
+
+[build]
+system = "autotools"
+configure_args = ["--sysconfdir=/etc", "--disable-static", "--enable-notifications"]

@@ -1,0 +1,19 @@
+name = "xfdesktop"
+version = "4.20.2"
+category = "xfce-base"
+
+[dependencies]
+link = ["glib", "gtk3", "cairo", "libxfce4util", "libxfce4ui", "libxfce4windowing", "xfconf", "exo", "garcon", "thunar", "libX11", "libyaml", "libnotify"]
+runtime = ["glibc", "glib", "gtk3", "cairo", "libxfce4util", "libxfce4ui", "libxfce4windowing", "xfconf", "exo", "garcon", "thunar", "libX11", "libyaml", "libnotify", "tumbler", "dbus", "desktop-file-utils"]
+build = ["pkgconf", "gettext", "xorgproto"]
+
+[hooks]
+operations = ["icon-cache", "desktop-database"]
+
+[[source]]
+url = "https://archive.xfce.org/src/xfce/xfdesktop/4.20/xfdesktop-4.20.2.tar.bz2"
+sha256 = "1d9bd76015fb6e9aca05e73cd998c7c66ed4fc8c10b626e08fc2eb7c39df3f7b"
+
+[build]
+system = "autotools"
+configure_args = ["--sysconfdir=/etc", "--disable-static", "--enable-x11", "--disable-wayland", "--enable-desktop-icons", "--enable-file-icons", "--enable-thunarx", "--enable-desktop-menu", "--enable-notifications", "--disable-tests"]

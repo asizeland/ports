@@ -1,0 +1,40 @@
+name = "gvfs"
+version = "1.62.0"
+category = "gnome-base"
+
+[dependencies]
+link = ["glib", "dbus", "libgudev", "udisks", "libxml2"]
+runtime = ["glibc", "glib", "dbus", "libgudev", "udisks", "libxml2", "gsettings-desktop-schemas", "psmisc"]
+build = ["glib", "gsettings-desktop-schemas", "meson", "ninja", "python3", "pkgconf", "gettext"]
+
+[hooks]
+operations = ["glib-schemas"]
+
+[[source]]
+url = "https://download.gnome.org/sources/gvfs/1.62/gvfs-1.62.0.tar.xz"
+sha256 = "dd8e6c255fd3bed5eeb190b59027c88b38e63c1be0932ddce9cfeb48f3c43d0f"
+
+[build]
+system = "custom"
+
+[scripts]
+build = '''
+tar xJf gvfs-1.62.0.tar.xz
+export PATH="/pkg/deps/meson/usr/bin:/pkg/deps/ninja/usr/bin:/pkg/deps/python3/usr/bin:/pkg/deps/pkgconf/usr/bin:/pkg/deps/gettext/usr/bin:/pkg/deps/glib/usr/bin:$PATH"
+meson setup gvfs-1.62.0 gvfs-build \
+    --prefix=/usr --libdir=/usr/lib --sysconfdir=/etc --localstatedir=/var \
+    --buildtype=release \
+    -Dadmin=false -Dafc=false -Dafp=false -Darchive=false -Dcdda=false \
+    -Ddnssd=false -Dgoa=false -Dgoogle=false -Dgphoto2=false -Dhttp=false \
+    -Dmtp=false -Dnfs=false -Donedrive=false -Dsftp=false -Dsmb=false \
+    -Dwsdd=false -Dudisks2=true -Dgudev=true \
+    -Dbluray=false -Dfuse=false -Dgcr=false -Dgcrypt=false -Dkeyring=false \
+    -Dlogind=false -Dlibusb=false \
+    -Dsystemduserunitdir=no -Dtmpfilesdir=no -Dbusy_processes_command=fuser \
+    -Ddevel_utils=false -Dinstalled_tests=false -Dunit_tests=false -Dman=false
+ninja -C gvfs-build
+'''
+install = '''
+export PATH="/pkg/deps/ninja/usr/bin:/pkg/deps/python3/usr/bin:$PATH"
+DESTDIR="$PKGDIR" ninja -C gvfs-build install
+'''

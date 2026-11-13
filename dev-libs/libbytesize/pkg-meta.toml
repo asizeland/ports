@@ -1,0 +1,28 @@
+name = "libbytesize"
+version = "2.12"
+category = "dev-libs"
+
+[dependencies]
+link = ["gmp", "mpfr", "pcre2"]
+runtime = ["glibc", "gmp", "mpfr", "pcre2"]
+build = ["pkgconf", "gettext"]
+
+[[source]]
+url = "https://github.com/storaged-project/libbytesize/releases/download/2.12/libbytesize-2.12.tar.gz"
+sha256 = "8356bac2cafd2f31f39bf1ad373cef8448cab08b817aeaee5c526d54e81c3c5a"
+
+[build]
+system = "custom"
+
+[scripts]
+build = '''
+tar xzf libbytesize-2.12.tar.gz
+cd libbytesize-2.12
+export PATH="/pkg/deps/pkgconf/usr/bin:/pkg/deps/gettext/usr/bin:$PATH"
+./configure --prefix=/usr --libdir=/usr/lib --disable-static \
+    --without-python3 --without-tools --without-gtk-doc
+make
+'''
+install = '''
+make -C libbytesize-2.12 DESTDIR="$PKGDIR" install
+'''

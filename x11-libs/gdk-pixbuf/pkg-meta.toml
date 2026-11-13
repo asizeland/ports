@@ -3,8 +3,8 @@ version = "2.42.12"
 category = "x11-libs"
 
 [dependencies]
-link = ["glib", "libpng"]
-runtime = ["glibc", "glib", "libpng", "shared-mime-info"]
+link = ["glib", "libpng", "libjpeg"]
+runtime = ["glibc", "glib", "libpng", "libjpeg", "shared-mime-info"]
 build = ["meson", "ninja", "python3", "pkgconf", "gettext"]
 
 [[source]]
@@ -13,4 +13,4 @@ sha256 = "b9505b3445b9a7e48ced34760c3bcb73e966df3ac94c95a148cb669ab748e3c7"
 
 [build]
 system = "meson"
-configure_args = ["-Dpng=enabled", "-Djpeg=disabled", "-Dtiff=disabled", "-Dgif=enabled", "-Dothers=disabled", "-Dbuiltin_loaders=all", "-Dintrospection=disabled", "-Dman=false", "-Dtests=false", "-Dinstalled_tests=false", "-Dgio_sniffing=false"]
+configure_args = ["-Dpng=enabled", "-Djpeg=enabled", "-Dtiff=disabled", "-Dgif=enabled", "-Dothers=disabled", "-Dbuiltin_loaders=all", "-Dintrospection=disabled", "-Dman=false", "-Dtests=false", "-Dinstalled_tests=false", "-Dgio_sniffing=false"]

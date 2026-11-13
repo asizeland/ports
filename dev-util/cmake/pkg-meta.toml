@@ -1,0 +1,29 @@
+name = "cmake"
+version = "4.5.0"
+category = "dev-util"
+
+[dependencies]
+link = ["gcc"]
+runtime = ["glibc", "gcc"]
+build = ["make"]
+
+[[source]]
+url = "https://github.com/Kitware/CMake/releases/download/v4.5.0/cmake-4.5.0.tar.gz"
+sha256 = "424352d6133e8455e020da787008e8dc67abb18820af3532572ab35657e49213"
+
+[build]
+system = "custom"
+
+[scripts]
+build = '''
+tar xzf cmake-4.5.0.tar.gz
+cd cmake-4.5.0
+export PATH="/pkg/deps/make/usr/bin:$PATH"
+./bootstrap --prefix=/usr --parallel=2 --no-system-libs --no-qt-gui \
+    --no-debugger -- \
+    -DBUILD_TESTING=OFF -DBUILD_CursesDialog=OFF -DBUILD_QtDialog=OFF
+make
+'''
+install = '''
+make -C cmake-4.5.0 DESTDIR="$PKGDIR" install
+'''

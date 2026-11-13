@@ -1,0 +1,32 @@
+name = "base-files"
+version = "1"
+category = "sys-apps"
+
+[build]
+system = "none"
+
+[scripts]
+install = '''
+for dir in \
+    bin boot dev etc etc/opt etc/skel home lib lib64 media mnt opt proc root run \
+    sbin srv sys tmp usr usr/bin usr/include usr/lib usr/libexec usr/local \
+    usr/local/bin usr/local/etc usr/local/games usr/local/include usr/local/lib \
+    usr/local/man usr/local/sbin usr/local/share usr/local/src usr/sbin \
+    usr/share usr/share/man usr/share/misc usr/src var var/cache var/lib \
+    var/local var/log var/mail var/opt var/spool var/tmp
+do
+    mkdir -p "$PKGDIR/$dir"
+    chmod 0755 "$PKGDIR/$dir"
+done
+chmod 0700 "$PKGDIR/root"
+chmod 1777 "$PKGDIR/tmp" "$PKGDIR/var/tmp"
+
+cat > "$PKGDIR/usr/lib/os-release" <<'EOF'
+NAME=Yakimo
+ID=yakimo
+PRETTY_NAME="Yakimo Linux"
+EOF
+ln -s /usr/lib/os-release "$PKGDIR/etc/os-release"
+ln -s /proc/self/mounts "$PKGDIR/etc/mtab"
+ln -s /run "$PKGDIR/var/run"
+'''

@@ -1,0 +1,19 @@
+name = "xfwm4"
+version = "4.20.0"
+category = "xfce-base"
+
+[dependencies]
+link = ["glib", "gtk3", "libxfce4util", "libxfce4ui", "xfconf", "libwnck", "libX11", "libXext", "libXi", "libXres", "libXinerama", "libXrender", "libXrandr", "libXcomposite", "libXfixes", "libXdamage", "libepoxy", "startup-notification"]
+runtime = ["glibc", "glib", "gtk3", "libxfce4util", "libxfce4ui", "xfconf", "libwnck", "libX11", "libXext", "libXi", "libXres", "libXinerama", "libXrender", "libXrandr", "libXcomposite", "libXfixes", "libXdamage", "libepoxy", "startup-notification", "desktop-file-utils"]
+build = ["pkgconf", "gettext", "xorgproto"]
+
+[hooks]
+operations = ["icon-cache", "desktop-database"]
+
+[[source]]
+url = "https://archive.xfce.org/src/xfce/xfwm4/4.20/xfwm4-4.20.0.tar.bz2"
+sha256 = "a58b63e49397aa0d8d1dcf0636be93c8bb5926779aef5165e0852890190dcf06"
+
+[build]
+system = "autotools"
+configure_args = ["--sysconfdir=/etc", "--disable-static", "--enable-xi2", "--enable-epoxy", "--enable-startup-notification", "--enable-xsync", "--enable-render", "--enable-randr", "--disable-xpresent", "--enable-compositor"]

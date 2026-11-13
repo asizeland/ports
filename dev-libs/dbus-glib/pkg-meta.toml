@@ -1,0 +1,16 @@
+name = "dbus-glib"
+version = "0.116"
+category = "dev-libs"
+
+[dependencies]
+link = ["dbus", "expat", "glib"]
+runtime = ["glibc", "dbus", "expat", "glib"]
+build = ["pkgconf"]
+
+[[source]]
+url = "https://dbus.freedesktop.org/releases/dbus-glib/dbus-glib-0.116.tar.gz"
+sha256 = "e3f3d4487e2883800770ed5899ed111bdc4ba7056af34a255c4c46ad8a2486f3"
+
+[build]
+system = "autotools"
+configure_args = ["--disable-static", "--disable-tests", "--disable-gtk-doc", "--disable-bash-completion", "--disable-gcov", "--disable-ansi"]

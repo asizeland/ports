@@ -1,0 +1,19 @@
+name = "xfce4-power-manager"
+version = "4.20.1"
+category = "xfce-base"
+
+[dependencies]
+link = ["glib", "gtk3", "libxfce4util", "libxfce4ui", "xfconf", "libnotify", "upower", "polkit", "xfce4-panel", "libX11", "libXrandr", "libXext"]
+runtime = ["glibc", "glib", "gtk3", "libxfce4util", "libxfce4ui", "xfconf", "libnotify", "upower", "polkit", "xfce4-panel", "libX11", "libXrandr", "libXext", "dbus", "desktop-file-utils"]
+build = ["pkgconf", "gettext", "xorgproto"]
+
+[hooks]
+operations = ["icon-cache", "desktop-database"]
+
+[[source]]
+url = "https://archive.xfce.org/src/xfce/xfce4-power-manager/4.20/xfce4-power-manager-4.20.1.tar.bz2"
+sha256 = "4fe18ef5f89c5ca9b96dde84dbd88ca7e36af1caf70ddd6429dc72128007edf7"
+
+[build]
+system = "autotools"
+configure_args = ["--sysconfdir=/etc", "--disable-static", "--enable-x11", "--disable-wayland", "--enable-polkit", "--enable-panel-plugins", "--with-backend=linux"]

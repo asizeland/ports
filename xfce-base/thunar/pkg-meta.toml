@@ -1,0 +1,25 @@
+name = "thunar"
+version = "4.20.10"
+category = "xfce-base"
+
+[dependencies]
+link = ["glib", "gtk3", "gdk-pixbuf", "pango", "exo", "libxfce4util", "libxfce4ui", "xfconf", "libX11", "libICE", "libSM", "libgudev", "libnotify", "pcre2"]
+runtime = ["glibc", "glib", "gtk3", "gdk-pixbuf", "pango", "exo", "libxfce4util", "libxfce4ui", "xfconf", "libX11", "libICE", "libSM", "libgudev", "libnotify", "pcre2", "dbus", "gvfs", "udisks", "shared-mime-info", "desktop-file-utils"]
+build = ["pkgconf", "gettext", "xorgproto"]
+
+[hooks]
+operations = ["icon-cache", "desktop-database"]
+
+[[source]]
+url = "https://archive.xfce.org/src/xfce/thunar/4.20/thunar-4.20.10.tar.bz2"
+sha256 = "a5a32b51028dc821155e44cdec025fe70398bae193c619ae6ba8b1babf6f49f1"
+
+[build]
+system = "autotools"
+configure_args = ["--sysconfdir=/etc", "--disable-static", "--enable-gio-unix", "--enable-gudev", "--enable-notifications", "--disable-exif", "--enable-pcre2", "--disable-gtk-doc", "--disable-introspection"]
+
+[scripts]
+install = '''
+make DESTDIR="$PKGDIR" install
+rm -rf "$PKGDIR/usr/lib/systemd/user"
+'''

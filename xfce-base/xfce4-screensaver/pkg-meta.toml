@@ -1,0 +1,19 @@
+name = "xfce4-screensaver"
+version = "4.20.2"
+category = "xfce-base"
+
+[dependencies]
+link = ["glib", "gtk3", "dbus", "dbus-glib", "xfconf", "libxfce4util", "libxfce4ui", "garcon", "libX11", "libXext", "libXScrnSaver", "libxklavier", "libwnck", "pam"]
+runtime = ["glibc", "glib", "gtk3", "dbus", "dbus-glib", "xfconf", "libxfce4util", "libxfce4ui", "garcon", "libX11", "libXext", "libXScrnSaver", "libxklavier", "libwnck", "pam", "desktop-file-utils"]
+build = ["meson", "ninja", "python3", "pkgconf", "gettext", "xorgproto"]
+
+[hooks]
+operations = ["icon-cache", "desktop-database"]
+
+[[source]]
+url = "https://archive.xfce.org/src/apps/xfce4-screensaver/4.20/xfce4-screensaver-4.20.2.tar.xz"
+sha256 = "5032f60a31df5e50a80512e301b595be5ea6a6bd762cdd95cacc24cbd29a01d7"
+
+[build]
+system = "meson"
+configure_args = ["--sysconfdir=/etc", "-Dx11=enabled", "-Dwayland=disabled", "-Dauthentication-scheme=pam", "-Dsession-manager=none", "-Dxscreensaverhackdir=no", "-Dkbd-layout-indicator=true", "-Ddocs=disabled"]

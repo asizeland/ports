@@ -1,0 +1,32 @@
+name = "cryptsetup"
+version = "2.8.8"
+category = "sys-fs"
+
+[dependencies]
+link = ["lvm2", "json-c", "openssl", "util-linux", "popt", "keyutils", "eudev"]
+runtime = ["glibc", "lvm2", "json-c", "openssl", "util-linux", "popt", "keyutils", "eudev"]
+build = ["pkgconf"]
+
+[[source]]
+url = "https://cdn.kernel.org/pub/linux/utils/cryptsetup/v2.8/cryptsetup-2.8.8.tar.xz"
+sha256 = "3acfa685f2dd7fcc832e0b77bc7093aa7da554a51ce8dafbb4138eaa854eee35"
+
+[build]
+system = "custom"
+
+[scripts]
+build = '''
+tar xJf cryptsetup-2.8.8.tar.xz
+cd cryptsetup-2.8.8
+export PATH="/pkg/deps/pkgconf/usr/bin:$PATH"
+./configure --prefix=/usr --libdir=/usr/lib --disable-static \
+    --disable-static-cryptsetup --disable-asciidoc --disable-nls \
+    --with-crypto_backend=openssl --with-tmpfilesdir=no \
+    --enable-keyring --enable-udev --disable-selinux \
+    --disable-ssh-token --disable-external-tokens \
+    --disable-pwquality --disable-libargon2 --disable-fuzz-targets
+make
+'''
+install = '''
+make -C cryptsetup-2.8.8 DESTDIR="$PKGDIR" install
+'''

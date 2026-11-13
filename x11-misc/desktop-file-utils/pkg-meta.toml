@@ -1,0 +1,19 @@
+name = "desktop-file-utils"
+version = "0.28"
+category = "x11-misc"
+
+[dependencies]
+link = ["glib"]
+runtime = ["glibc", "glib"]
+build = ["meson", "ninja", "python3", "pkgconf"]
+
+[hooks]
+operations = ["desktop-database"]
+
+[[source]]
+url = "https://www.freedesktop.org/software/desktop-file-utils/releases/desktop-file-utils-0.28.tar.xz"
+sha256 = "4401d4e231d842c2de8242395a74a395ca468cd96f5f610d822df33594898a70"
+
+[build]
+system = "meson"
+configure_args = ["-Dansi=false", "-Dgcov=false"]

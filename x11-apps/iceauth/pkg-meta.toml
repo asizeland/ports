@@ -1,0 +1,16 @@
+name = "iceauth"
+version = "1.0.11"
+category = "x11-apps"
+
+[dependencies]
+link = ["libICE"]
+runtime = ["glibc", "libICE"]
+build = ["xorgproto", "pkgconf"]
+
+[[source]]
+url = "https://www.x.org/releases/individual/app/iceauth-1.0.11.tar.xz"
+sha256 = "9d633cf0d4d1d98e3ef02d18660372958b60a67016e8a72cd04093a8d8f8d4e9"
+
+[build]
+system = "autotools"
+configure_args = ["--disable-static"]

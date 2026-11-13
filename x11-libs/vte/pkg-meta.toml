@@ -1,0 +1,16 @@
+name = "vte"
+version = "0.74.2"
+category = "x11-libs"
+
+[dependencies]
+link = ["gcc", "cairo", "fribidi", "glib", "gnutls", "gtk3", "pango", "pcre2", "zlib"]
+runtime = ["glibc", "gcc", "cairo", "fribidi", "glib", "gnutls", "gtk3", "pango", "pcre2", "zlib"]
+build = ["meson", "ninja", "python3", "pkgconf", "gettext"]
+
+[[source]]
+url = "https://download.gnome.org/sources/vte/0.74/vte-0.74.2.tar.xz"
+sha256 = "a535fb2a98fea8a2449cd1a02cccf5190131dddff52e715afdace3feb536eae7"
+
+[build]
+system = "meson"
+configure_args = ["-Dgtk3=true", "-Dgtk4=false", "-Dfribidi=true", "-Dgnutls=true", "-Dicu=false", "-D_systemd=false", "-Dgir=false", "-Dvapi=false", "-Ddocs=false", "-Dglade=false", "-Ddebugg=false", "-Da11y=true"]

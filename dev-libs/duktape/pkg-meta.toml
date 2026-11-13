@@ -1,0 +1,23 @@
+name = "duktape"
+version = "2.7.0"
+category = "dev-libs"
+
+[dependencies]
+runtime = ["glibc"]
+
+[[source]]
+url = "https://duktape.org/duktape-2.7.0.tar.xz"
+sha256 = "90f8d2fa8b5567c6899830ddef2c03f3c27960b11aca222fa17aa7ac613c2890"
+
+[build]
+system = "custom"
+
+[scripts]
+build = '''
+tar xJf duktape-2.7.0.tar.xz
+make -C duktape-2.7.0 -f Makefile.sharedlibrary CFLAGS="-O2"
+'''
+install = '''
+make -C duktape-2.7.0 -f Makefile.sharedlibrary \
+    INSTALL_PREFIX=/usr LIBDIR=/lib DESTDIR="$PKGDIR" install
+'''

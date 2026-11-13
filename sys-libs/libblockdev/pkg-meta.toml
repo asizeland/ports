@@ -1,0 +1,33 @@
+name = "libblockdev"
+version = "3.6.0"
+category = "sys-libs"
+
+[dependencies]
+link = ["glib", "eudev", "kmod", "cryptsetup", "lvm2", "keyutils", "util-linux", "e2fsprogs", "parted", "libbytesize", "libnvme", "libatasmart"]
+runtime = ["glibc", "glib", "eudev", "kmod", "cryptsetup", "lvm2", "keyutils", "util-linux", "e2fsprogs", "parted", "libbytesize", "libnvme", "libatasmart", "mdadm"]
+build = ["pkgconf", "gettext"]
+
+[[source]]
+url = "https://github.com/storaged-project/libblockdev/releases/download/3.6.0/libblockdev-3.6.0.tar.gz"
+sha256 = "9c21338257746cd00c25fcf5975716d016b6d43bfde20ee21f254cbf7d0d2742"
+
+[build]
+system = "custom"
+
+[scripts]
+build = '''
+tar xzf libblockdev-3.6.0.tar.gz
+cd libblockdev-3.6.0
+export PATH="/pkg/deps/pkgconf/usr/bin:/pkg/deps/gettext/usr/bin:$PATH"
+./configure --prefix=/usr --libdir=/usr/lib --sysconfdir=/etc \
+    --disable-static --disable-tests --enable-introspection=no \
+    --without-python3 --without-gtk-doc --without-escrow --with-tools \
+    --with-crypto --with-dm --with-loop --with-mdraid --with-swap \
+    --with-part --with-fs --with-nvme --with-smart \
+    --without-lvm --without-lvm_dbus --without-btrfs --without-mpath \
+    --without-nvdimm --without-smartmontools --without-drivedb --without-s390
+make
+'''
+install = '''
+make -C libblockdev-3.6.0 DESTDIR="$PKGDIR" install
+'''

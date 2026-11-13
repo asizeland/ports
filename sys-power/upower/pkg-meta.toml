@@ -1,0 +1,51 @@
+name = "upower"
+version = "1.91.5"
+category = "sys-power"
+
+[dependencies]
+link = ["glib", "polkit", "libgudev"]
+runtime = ["glibc", "glib", "polkit", "libgudev", "eudev", "dbus"]
+build = ["meson", "ninja", "python3", "pkgconf", "gettext"]
+
+[[source]]
+url = "https://gitlab.freedesktop.org/upower/upower/-/archive/v1.91.5/upower-v1.91.5.tar.gz"
+filename = "upower-1.91.5.tar.gz"
+sha256 = "d900f175e39fbc0dfd8632f7c70606e10f79903ee4171d199aa777dfa3a396e2"
+
+[build]
+system = "custom"
+
+[scripts]
+build = '''
+tar xzf upower-1.91.5.tar.gz
+export PATH="/pkg/deps/meson/usr/bin:/pkg/deps/ninja/usr/bin:/pkg/deps/python3/usr/bin:/pkg/deps/pkgconf/usr/bin:/pkg/deps/gettext/usr/bin:$PATH"
+meson setup upower-v1.91.5 upower-build \
+    --prefix=/usr --libdir=/usr/lib --sysconfdir=/etc --localstatedir=/var \
+    --buildtype=release \
+    -Dos_backend=linux -Dpolkit=enabled -Didevice=disabled \
+    -Dintrospection=disabled -Dinstalled_tests=false \
+    -Dgtk-doc=false -Dman=false -Dsystemdsystemunitdir=no \
+    -Dudevrulesdir=/usr/lib/udev/rules.d -Dudevhwdbdir=/usr/lib/udev/hwdb.d \
+    -Dzshcompletiondir=no
+ninja -C upower-build
+'''
+install = '''
+export PATH="/pkg/deps/ninja/usr/bin:/pkg/deps/python3/usr/bin:$PATH"
+DESTDIR="$PKGDIR" ninja -C upower-build install
+sed -i '/^SystemdService=/d' "$PKGDIR/usr/share/dbus-1/system-services/org.freedesktop.UPower.service"
+
+mkdir -p "$PKGDIR/etc/init.d"
+cat > "$PKGDIR/etc/init.d/upower" <<'EOF'
+#!/sbin/openrc-run
+
+supervisor=supervise-daemon
+description="UPower power management daemon"
+command="/usr/libexec/upowerd"
+
+depend() {
+	need dbus
+	after udev
+}
+EOF
+chmod 0755 "$PKGDIR/etc/init.d/upower"
+'''

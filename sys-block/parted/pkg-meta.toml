@@ -1,0 +1,28 @@
+name = "parted"
+version = "3.6"
+category = "sys-block"
+
+[dependencies]
+link = ["util-linux", "lvm2"]
+runtime = ["glibc", "util-linux", "lvm2"]
+build = ["pkgconf"]
+
+[[source]]
+url = "https://ftp.gnu.org/gnu/parted/parted-3.6.tar.xz"
+sha256 = "3b43dbe33cca0f9a18601ebab56b7852b128ec1a3df3a9b30ccde5e73359e612"
+
+[build]
+system = "custom"
+
+[scripts]
+build = '''
+tar xJf parted-3.6.tar.xz
+cd parted-3.6
+export PATH="/pkg/deps/pkgconf/usr/bin:$PATH"
+./configure --prefix=/usr --libdir=/usr/lib --disable-static \
+    --disable-nls --without-readline --enable-device-mapper
+make
+'''
+install = '''
+make -C parted-3.6 DESTDIR="$PKGDIR" install
+'''

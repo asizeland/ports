@@ -1,0 +1,19 @@
+name = "xfce4-panel"
+version = "4.20.8"
+category = "xfce-base"
+
+[dependencies]
+link = ["glib", "gtk3", "cairo", "libxfce4util", "libxfce4ui", "xfconf", "garcon", "exo", "libxfce4windowing", "libX11", "libXext", "libwnck"]
+runtime = ["glibc", "glib", "gtk3", "cairo", "libxfce4util", "libxfce4ui", "xfconf", "garcon", "exo", "libxfce4windowing", "libX11", "libXext", "libwnck", "dbus", "desktop-file-utils"]
+build = ["pkgconf", "gettext", "xorgproto"]
+
+[hooks]
+operations = ["icon-cache", "desktop-database"]
+
+[[source]]
+url = "https://archive.xfce.org/src/xfce/xfce4-panel/4.20/xfce4-panel-4.20.8.tar.bz2"
+sha256 = "d69cb1f377953aeb1fb9bdbcef12c246bea66586e3f2868f3b758e0e8ce3d3fe"
+
+[build]
+system = "autotools"
+configure_args = ["--sysconfdir=/etc", "--disable-static", "--enable-x11", "--disable-wayland", "--disable-gtk-layer-shell", "--disable-dbusmenu-gtk3", "--disable-gtk-doc", "--disable-introspection", "--disable-vala"]

@@ -1,0 +1,19 @@
+name = "xfce4-settings"
+version = "4.20.5"
+category = "xfce-base"
+
+[dependencies]
+link = ["glib", "gtk3", "garcon", "exo", "libxfce4util", "libxfce4ui", "xfconf", "libX11", "libXext", "libXrandr", "libXcursor", "libXi", "fontconfig", "libxklavier", "libnotify", "upower"]
+runtime = ["glibc", "glib", "gtk3", "garcon", "exo", "libxfce4util", "libxfce4ui", "xfconf", "libX11", "libXext", "libXrandr", "libXcursor", "libXi", "fontconfig", "libxklavier", "libnotify", "upower", "xf86-input-libinput", "hwdata", "dbus", "desktop-file-utils"]
+build = ["pkgconf", "gettext", "xorgproto", "libxml2", "xf86-input-libinput"]
+
+[hooks]
+operations = ["icon-cache", "desktop-database"]
+
+[[source]]
+url = "https://archive.xfce.org/src/xfce/xfce4-settings/4.20/xfce4-settings-4.20.5.tar.bz2"
+sha256 = "a5fbe0e511cce29d603320ade575ad4001bd570e60f37760233237ba478affe8"
+
+[build]
+system = "autotools"
+configure_args = ["--sysconfdir=/etc", "--disable-static", "--enable-x11", "--disable-wayland", "--enable-xrandr", "--enable-xcursor", "--enable-xorg-libinput", "--enable-libxklavier", "--enable-libnotify", "--enable-upower-glib", "--disable-gtk-layer-shell", "--disable-colord", "--disable-sound-settings", "--with-pnp-ids-path=/usr/share/hwdata/pnp.ids"]

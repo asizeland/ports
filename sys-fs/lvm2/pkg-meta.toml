@@ -1,0 +1,36 @@
+name = "lvm2"
+version = "2.03.44"
+category = "sys-fs"
+
+[dependencies]
+link = ["util-linux", "eudev"]
+runtime = ["glibc", "util-linux", "eudev"]
+build = ["pkgconf"]
+
+[[source]]
+url = "https://sourceware.org/pub/lvm2/LVM2.2.03.44.tgz"
+sha256 = "42f829927d2d459f5733fcdb38a5bf2455a8b84072193092450a9c69d6596eca"
+
+[build]
+system = "custom"
+
+[scripts]
+build = '''
+tar xzf LVM2.2.03.44.tgz
+cd LVM2.2.03.44
+export PATH="/pkg/deps/pkgconf/usr/bin:$PATH"
+./configure --prefix=/usr --libdir=/usr/lib --usrlibdir=/usr/lib \
+    --sysconfdir=/etc --localstatedir=/var \
+    --enable-pkgconfig --enable-udev_sync --enable-udev_rules --with-udev \
+    --with-udevdir=/usr/lib/udev/rules.d \
+    --without-systemd --with-systemdsystemunitdir=no --with-tmpfilesdir=no \
+    --disable-systemd-journal --disable-app-machineid --disable-sd-notify \
+    --disable-readline --disable-selinux --disable-nls \
+    --disable-nvme-wwid --without-libnvme --without-libaio --without-liburing \
+    --disable-use-lvmlockd --disable-use-lvmpolld --disable-dmeventd \
+    --disable-fsadm --disable-lvmimportvdo --disable-blkdeactivate
+make device-mapper
+'''
+install = '''
+make -C LVM2.2.03.44 DESTDIR="$PKGDIR" install_device-mapper
+'''

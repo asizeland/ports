@@ -1,0 +1,16 @@
+name = "libxklavier"
+version = "5.3"
+category = "x11-libs"
+
+[dependencies]
+link = ["glib", "libxml2", "libX11", "libXi", "libxkbfile"]
+runtime = ["glibc", "glib", "libxml2", "libX11", "libXi", "libxkbfile", "iso-codes", "xkeyboard-config", "xkbcomp"]
+build = ["pkgconf", "gettext", "xorgproto", "iso-codes"]
+
+[[source]]
+url = "https://download.gnome.org/sources/libxklavier/5.3/libxklavier-5.3.tar.xz"
+sha256 = "ebec3bc54b5652838502b96223152fb1cd8fcb14ace5cb02d718fc3276bbd404"
+
+[build]
+system = "autotools"
+configure_args = ["--disable-static", "--enable-xkb-support", "--disable-xmodmap-support", "--with-xkb-base=/usr/share/X11/xkb", "--with-xkb-bin-base=/usr/bin", "--disable-introspection", "--disable-gtk-doc"]

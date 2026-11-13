@@ -1,0 +1,26 @@
+name = "mdadm"
+version = "4.4"
+category = "sys-fs"
+
+[dependencies]
+link = ["eudev"]
+runtime = ["glibc", "eudev"]
+build = ["pkgconf"]
+
+[[source]]
+url = "https://cdn.kernel.org/pub/linux/utils/raid/mdadm/mdadm-4.4.tar.xz"
+sha256 = "9b488f35ed153df99924b5fe41eed380e8512de8f18a118628cacdd681b1d573"
+
+[build]
+system = "custom"
+
+[scripts]
+build = '''
+tar xJf mdadm-4.4.tar.xz
+make -C mdadm-4.4 BINDIR=/usr/sbin CHECK_RUN_DIR=0 \
+    PKG_CONFIG=/pkg/deps/pkgconf/usr/bin/pkg-config
+'''
+install = '''
+make -C mdadm-4.4 BINDIR=/usr/sbin UDEVDIR=/usr/lib/udev \
+    DESTDIR="$PKGDIR" install-bin install-udev
+'''

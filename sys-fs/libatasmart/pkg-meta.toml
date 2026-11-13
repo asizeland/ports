@@ -1,0 +1,27 @@
+name = "libatasmart"
+version = "0.19"
+category = "sys-fs"
+
+[dependencies]
+link = ["eudev"]
+runtime = ["glibc", "eudev"]
+build = ["pkgconf"]
+
+[[source]]
+url = "https://0pointer.de/public/libatasmart-0.19.tar.xz"
+sha256 = "61f0ea345f63d28ab2ff0dc352c22271661b66bf09642db3a4049ac9dbdb0f8d"
+
+[build]
+system = "custom"
+
+[scripts]
+build = '''
+tar xJf libatasmart-0.19.tar.xz
+cd libatasmart-0.19
+export PATH="/pkg/deps/pkgconf/usr/bin:$PATH"
+./configure --prefix=/usr --libdir=/usr/lib --disable-static
+make
+'''
+install = '''
+make -C libatasmart-0.19 DESTDIR="$PKGDIR" install
+'''

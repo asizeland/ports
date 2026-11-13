@@ -1,0 +1,28 @@
+name = "psmisc"
+version = "23.7"
+category = "sys-apps"
+
+[dependencies]
+link = ["ncurses"]
+runtime = ["glibc", "ncurses"]
+
+[[source]]
+url = "https://downloads.sourceforge.net/project/psmisc/psmisc/psmisc-23.7.tar.xz"
+sha256 = "58c55d9c1402474065adae669511c191de374b0871eec781239ab400b907c327"
+
+[build]
+system = "custom"
+
+[scripts]
+build = '''
+tar xJf psmisc-23.7.tar.xz
+cd psmisc-23.7
+./configure --prefix=/usr --disable-static --disable-nls \
+    --disable-selinux --disable-apparmor \
+    CPPFLAGS="-I/pkg/deps/ncurses/usr/include" \
+    LDFLAGS="-L/pkg/deps/ncurses/usr/lib -Wl,-rpath,/usr/lib"
+make
+'''
+install = '''
+make -C psmisc-23.7 DESTDIR="$PKGDIR" install
+'''

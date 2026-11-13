@@ -1,0 +1,19 @@
+name = "xfce4-session"
+version = "4.20.4"
+category = "xfce-base"
+
+[dependencies]
+link = ["glib", "gtk3", "libxfce4util", "libxfce4ui", "xfconf", "libxfce4windowing", "libX11", "libwnck", "libICE", "libSM", "polkit"]
+runtime = ["glibc", "glib", "gtk3", "libxfce4util", "libxfce4ui", "xfconf", "libxfce4windowing", "libX11", "libwnck", "libICE", "libSM", "polkit", "dbus", "upower", "iceauth", "xrdb", "xdg-user-dirs", "desktop-file-utils"]
+build = ["pkgconf", "gettext", "xorgproto", "iceauth"]
+
+[hooks]
+operations = ["icon-cache", "desktop-database"]
+
+[[source]]
+url = "https://archive.xfce.org/src/xfce/xfce4-session/4.20/xfce4-session-4.20.4.tar.bz2"
+sha256 = "805c373378d080754d69dd2f20db95cdc066c89a4f024a41435ca0d66571c402"
+
+[build]
+system = "autotools"
+configure_args = ["--sysconfdir=/etc", "--disable-static", "--enable-x11", "--disable-wayland", "--enable-legacy-sm", "--enable-polkit", "--disable-gtk-layer-shell", "--with-backend=linux", "--with-xsession-prefix=/usr"]
