@@ -35,7 +35,7 @@ echo "slibdir=/usr/lib" > configparms
 ../glibc-2.42/configure --prefix=/usr --libdir=/usr/lib \
     --with-headers=/pkg/deps/linux-headers/usr/include \
     --enable-kernel=6.1 --disable-werror --disable-profile \
-    --without-selinux
+    --without-gd --without-selinux
 make
 '''
 install = '''
