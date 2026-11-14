@@ -3,9 +3,9 @@ version = "4.20.8"
 category = "xfce-base"
 
 [dependencies]
-link = ["glib", "gtk3", "cairo", "libxfce4util", "libxfce4ui", "xfconf", "garcon", "exo", "libxfce4windowing", "libX11", "libXext", "libwnck"]
-runtime = ["glibc", "glib", "gtk3", "cairo", "libxfce4util", "libxfce4ui", "xfconf", "garcon", "exo", "libxfce4windowing", "libX11", "libXext", "libwnck", "dbus", "desktop-file-utils"]
-build = ["pkgconf", "gettext", "xorgproto"]
+link = ["at-spi2-core", "glib", "gtk3", "cairo", "gdk-pixbuf", "harfbuzz", "pango", "libxfce4util", "libxfce4ui", "xfconf", "garcon", "exo", "libxfce4windowing", "libX11", "libXext", "libwnck"]
+runtime = ["glibc", "at-spi2-core", "glib", "gtk3", "cairo", "gdk-pixbuf", "harfbuzz", "pango", "libxfce4util", "libxfce4ui", "xfconf", "garcon", "exo", "libxfce4windowing", "libX11", "libXext", "libwnck", "dbus", "desktop-file-utils"]
+build = ["pkgconf", "gettext", "xorgproto", "linux-headers", "python3"]
 
 [hooks]
 operations = ["icon-cache", "desktop-database"]

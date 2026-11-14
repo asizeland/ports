@@ -5,7 +5,7 @@ category = "sys-fs"
 [dependencies]
 link = ["util-linux", "eudev"]
 runtime = ["glibc", "util-linux", "eudev"]
-build = ["pkgconf"]
+build = ["pkgconf", "linux-headers"]
 
 [[source]]
 url = "https://sourceware.org/pub/lvm2/LVM2.2.03.44.tgz"
@@ -19,7 +19,7 @@ build = '''
 tar xzf LVM2.2.03.44.tgz
 cd LVM2.2.03.44
 export PATH="/pkg/deps/pkgconf/usr/bin:$PATH"
-./configure --prefix=/usr --libdir=/usr/lib --usrlibdir=/usr/lib \
+./configure --prefix=/usr --libdir=/usr/lib \
     --sysconfdir=/etc --localstatedir=/var \
     --enable-pkgconfig --enable-udev_sync --enable-udev_rules --with-udev \
     --with-udevdir=/usr/lib/udev/rules.d \
@@ -32,5 +32,5 @@ export PATH="/pkg/deps/pkgconf/usr/bin:$PATH"
 make device-mapper
 '''
 install = '''
-make -C LVM2.2.03.44 DESTDIR="$PKGDIR" install_device-mapper
+make -j1 -C LVM2.2.03.44 DESTDIR="$PKGDIR" install_device-mapper
 '''

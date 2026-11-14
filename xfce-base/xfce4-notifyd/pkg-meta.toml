@@ -3,9 +3,9 @@ version = "0.9.7"
 category = "xfce-base"
 
 [dependencies]
-link = ["glib", "gtk3", "libnotify", "xfce4-panel", "libxfce4util", "libxfce4ui", "xfconf", "sqlite", "dbus", "libX11"]
-runtime = ["glibc", "glib", "gtk3", "libnotify", "xfce4-panel", "libxfce4util", "libxfce4ui", "xfconf", "sqlite", "dbus", "libX11", "desktop-file-utils"]
-build = ["pkgconf", "gettext", "xorgproto"]
+link = ["at-spi2-core", "cairo", "gdk-pixbuf", "glib", "gtk3", "harfbuzz", "pango", "libnotify", "xfce4-panel", "libxfce4util", "libxfce4ui", "xfconf", "sqlite", "dbus", "libX11"]
+runtime = ["glibc", "at-spi2-core", "cairo", "gdk-pixbuf", "glib", "gtk3", "harfbuzz", "pango", "libnotify", "xfce4-panel", "libxfce4util", "libxfce4ui", "xfconf", "sqlite", "dbus", "libX11", "desktop-file-utils"]
+build = ["pkgconf", "gettext", "xorgproto", "python3", "linux-headers"]
 
 [hooks]
 operations = ["icon-cache", "desktop-database"]

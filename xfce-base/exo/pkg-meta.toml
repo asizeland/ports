@@ -3,9 +3,9 @@ version = "4.20.0"
 category = "xfce-base"
 
 [dependencies]
-link = ["glib", "gtk3", "libxfce4util", "libxfce4ui"]
-runtime = ["glibc", "glib", "gtk3", "libxfce4util", "libxfce4ui", "shared-mime-info"]
-build = ["pkgconf", "gettext"]
+link = ["at-spi2-core", "cairo", "gdk-pixbuf", "glib", "gtk3", "harfbuzz", "pango", "libxfce4util", "libxfce4ui"]
+runtime = ["glibc", "at-spi2-core", "cairo", "gdk-pixbuf", "glib", "gtk3", "harfbuzz", "pango", "libxfce4util", "libxfce4ui", "shared-mime-info"]
+build = ["pkgconf", "gettext", "linux-headers", "xorgproto"]
 
 [[source]]
 url = "https://archive.xfce.org/src/xfce/exo/4.20/exo-4.20.0.tar.bz2"

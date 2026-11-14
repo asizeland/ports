@@ -5,7 +5,7 @@ category = "xfce-base"
 [dependencies]
 link = ["glib", "libxfce4util", "gdk-pixbuf", "freetype", "libjpeg", "libpng", "curl"]
 runtime = ["glibc", "glib", "libxfce4util", "gdk-pixbuf", "freetype", "libjpeg", "libpng", "curl", "gtk3", "dbus"]
-build = ["pkgconf", "gettext"]
+build = ["pkgconf", "gettext", "python3", "linux-headers"]
 
 [hooks]
 operations = ["icon-cache"]

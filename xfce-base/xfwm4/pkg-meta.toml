@@ -3,9 +3,9 @@ version = "4.20.0"
 category = "xfce-base"
 
 [dependencies]
-link = ["glib", "gtk3", "libxfce4util", "libxfce4ui", "xfconf", "libwnck", "libX11", "libXext", "libXi", "libXres", "libXinerama", "libXrender", "libXrandr", "libXcomposite", "libXfixes", "libXdamage", "libepoxy", "startup-notification"]
-runtime = ["glibc", "glib", "gtk3", "libxfce4util", "libxfce4ui", "xfconf", "libwnck", "libX11", "libXext", "libXi", "libXres", "libXinerama", "libXrender", "libXrandr", "libXcomposite", "libXfixes", "libXdamage", "libepoxy", "startup-notification", "desktop-file-utils"]
-build = ["pkgconf", "gettext", "xorgproto"]
+link = ["at-spi2-core", "cairo", "gdk-pixbuf", "glib", "gtk3", "harfbuzz", "pango", "libxfce4util", "libxfce4ui", "xfconf", "libwnck", "libX11", "libXext", "libXi", "libXres", "libXinerama", "libXrender", "libXrandr", "libXcomposite", "libXfixes", "libXdamage", "libICE", "libSM", "libepoxy", "startup-notification"]
+runtime = ["glibc", "at-spi2-core", "cairo", "gdk-pixbuf", "glib", "gtk3", "harfbuzz", "pango", "libxfce4util", "libxfce4ui", "xfconf", "libwnck", "libX11", "libXext", "libXi", "libXres", "libXinerama", "libXrender", "libXrandr", "libXcomposite", "libXfixes", "libXdamage", "libICE", "libSM", "libepoxy", "startup-notification", "desktop-file-utils"]
+build = ["pkgconf", "gettext", "xorgproto", "linux-headers"]
 
 [hooks]
 operations = ["icon-cache", "desktop-database"]

@@ -5,7 +5,7 @@ category = "sys-fs"
 [dependencies]
 link = ["eudev"]
 runtime = ["glibc", "eudev"]
-build = ["pkgconf"]
+build = ["pkgconf", "linux-headers"]
 
 [[source]]
 url = "https://cdn.kernel.org/pub/linux/utils/raid/mdadm/mdadm-4.4.tar.xz"
@@ -18,9 +18,11 @@ system = "custom"
 build = '''
 tar xJf mdadm-4.4.tar.xz
 make -C mdadm-4.4 BINDIR=/usr/sbin CHECK_RUN_DIR=0 \
+    COROSYNC=-DNO_COROSYNC DLM=-DNO_DLM \
+    CXFLAGS="-O2 -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE -Wno-error=implicit-fallthrough -Wno-error=unterminated-string-initialization" \
     PKG_CONFIG=/pkg/deps/pkgconf/usr/bin/pkg-config
 '''
 install = '''
-make -C mdadm-4.4 BINDIR=/usr/sbin UDEVDIR=/usr/lib/udev \
+make -C mdadm-4.4 BINDIR=/usr/sbin UDEVDIR=/usr/lib/udev CHECK_RUN_DIR=0 \
     DESTDIR="$PKGDIR" install-bin install-udev
 '''

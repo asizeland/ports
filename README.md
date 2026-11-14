@@ -111,6 +111,10 @@ error.
 | x11-libs/gtk3 | GUI toolkit | meson | GTK 3 X11 backend, accessibility, MIME data, and base icon theme |
 | dev-python/mako, markupsafe, packaging, pyyaml | build-time Python modules | install-only | Mesa's template, version, and YAML build requirements |
 | x11-drivers/nvidia-drivers | proprietary GPU driver | vendor run archive + Kbuild | RTX 4070-capable 595.112.07; kernel modules, Xorg driver, and GLX extension |
+| sys-apps/base-files | filesystem hierarchy | install-only | standard directories, compatibility links, locked system accounts, and NSS configuration; no machine-specific configuration |
+| xfce-base/xfce4-meta | complete XFCE 4.20 desktop | meta-package | session, panel, window manager, Thunar, settings, terminal, notifications, power, screensaver, thumbnails, and removable-media integration |
+| sys-auth/linux-pam, polkit | authentication and authorization | meson | restrictive PAM policy and D-Bus authorization; no passwordless rules |
+| sys-power/upower, sys-fs/udisks, gnome-base/gvfs | desktop device services | meson/autotools | power information, local storage, and GVfs volume integration without systemd |
 
 The **chrootable set** (bash through xz above): with
 them installed, the root can be chrooted into (`arch-chroot`-style,
@@ -130,11 +134,15 @@ activation. A driver change rebuilds every installed kernel; a new kernel
 rebuilds every installed DKMS driver. Logs are kept under `/var/log/pkg/`.
 Module signing and removal/undo cleanup are not implemented yet.
 
-The desktop section builds the X11 and GTK3 stack and runs a real headless
-session through `startx` and `xauth`. Xterm and a compiled GTK window run
-under Xvfb, with Mesa's softpipe renderer. This validates the recipes,
-activation, caches, compiler, and client libraries without claiming that a
-physical display or NVIDIA GPU has been tested.
+The desktop section builds X11, GTK3, the full XFCE session, and its local
+storage and authorization stack. Through `startx`, Xauth, Xvfb, and private
+session and system D-Bus buses, it runs Xterm, a compiled GTK window, Xfwm4, the panel, Xfdesktop,
+Xfsettingsd, and Xfce Terminal. It also sends an XFCE notification, generates a
+real PNG thumbnail through Tumbler, and checks UPower, Polkit, UDisks, and GVfs
+clients without mounting a device. Mesa uses its softpipe renderer. These tests
+validate recipes, activation, caches, compiler, services, and client libraries;
+they do not prove physical display/GPU operation, active-session authorization,
+screen unlocking, suspend, or removable-media mounting.
 
 ## Testing one recipe directly
 

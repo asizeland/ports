@@ -3,8 +3,8 @@ version = "4.20.2"
 category = "xfce-base"
 
 [dependencies]
-link = ["glib", "gtk3", "dbus", "dbus-glib", "xfconf", "libxfce4util", "libxfce4ui", "garcon", "libX11", "libXext", "libXScrnSaver", "libxklavier", "libwnck", "pam"]
-runtime = ["glibc", "glib", "gtk3", "dbus", "dbus-glib", "xfconf", "libxfce4util", "libxfce4ui", "garcon", "libX11", "libXext", "libXScrnSaver", "libxklavier", "libwnck", "pam", "desktop-file-utils"]
+link = ["cairo", "gdk-pixbuf", "glib", "gtk3", "pango", "dbus", "dbus-glib", "xfconf", "libxfce4util", "libxfce4ui", "garcon", "libX11", "libXext", "libXScrnSaver", "libxklavier", "libwnck", "linux-pam"]
+runtime = ["glibc", "cairo", "gdk-pixbuf", "glib", "gtk3", "pango", "dbus", "dbus-glib", "xfconf", "libxfce4util", "libxfce4ui", "garcon", "libX11", "libXext", "libXScrnSaver", "libxklavier", "libwnck", "linux-pam", "desktop-file-utils"]
 build = ["meson", "ninja", "python3", "pkgconf", "gettext", "xorgproto"]
 
 [hooks]

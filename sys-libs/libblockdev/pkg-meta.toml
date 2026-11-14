@@ -5,7 +5,7 @@ category = "sys-libs"
 [dependencies]
 link = ["glib", "eudev", "kmod", "cryptsetup", "lvm2", "keyutils", "util-linux", "e2fsprogs", "parted", "libbytesize", "libnvme", "libatasmart"]
 runtime = ["glibc", "glib", "eudev", "kmod", "cryptsetup", "lvm2", "keyutils", "util-linux", "e2fsprogs", "parted", "libbytesize", "libnvme", "libatasmart", "mdadm"]
-build = ["pkgconf", "gettext"]
+build = ["pkgconf", "gettext", "linux-headers"]
 
 [[source]]
 url = "https://github.com/storaged-project/libblockdev/releases/download/3.6.0/libblockdev-3.6.0.tar.gz"

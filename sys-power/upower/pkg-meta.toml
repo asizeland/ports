@@ -5,7 +5,7 @@ category = "sys-power"
 [dependencies]
 link = ["glib", "polkit", "libgudev"]
 runtime = ["glibc", "glib", "polkit", "libgudev", "eudev", "dbus"]
-build = ["meson", "ninja", "python3", "pkgconf", "gettext"]
+build = ["meson", "ninja", "python3", "pkgconf", "gettext", "linux-headers"]
 
 [[source]]
 url = "https://gitlab.freedesktop.org/upower/upower/-/archive/v1.91.5/upower-v1.91.5.tar.gz"
@@ -27,6 +27,7 @@ meson setup upower-v1.91.5 upower-build \
     -Dgtk-doc=false -Dman=false -Dsystemdsystemunitdir=no \
     -Dudevrulesdir=/usr/lib/udev/rules.d -Dudevhwdbdir=/usr/lib/udev/hwdb.d \
     -Dzshcompletiondir=no
+export GETTEXTDATADIRS="/pkg/deps/polkit/usr/share/gettext"
 ninja -C upower-build
 '''
 install = '''

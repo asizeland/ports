@@ -5,7 +5,7 @@ category = "sys-auth"
 [dependencies]
 link = ["libxcrypt"]
 runtime = ["glibc", "libxcrypt"]
-build = ["meson", "ninja", "python3", "pkgconf"]
+build = ["meson", "ninja", "python3", "pkgconf", "linux-headers"]
 
 [[source]]
 url = "https://github.com/linux-pam/linux-pam/releases/download/v1.7.3/Linux-PAM-1.7.3.tar.xz"

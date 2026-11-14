@@ -5,7 +5,7 @@ category = "dev-util"
 [dependencies]
 link = ["gcc"]
 runtime = ["glibc", "gcc"]
-build = ["make"]
+build = ["make", "linux-headers"]
 
 [[source]]
 url = "https://github.com/Kitware/CMake/releases/download/v4.5.0/cmake-4.5.0.tar.gz"
@@ -21,7 +21,7 @@ cd cmake-4.5.0
 export PATH="/pkg/deps/make/usr/bin:$PATH"
 ./bootstrap --prefix=/usr --parallel=2 --no-system-libs --no-qt-gui \
     --no-debugger -- \
-    -DBUILD_TESTING=OFF -DBUILD_CursesDialog=OFF -DBUILD_QtDialog=OFF
+    -DBUILD_TESTING=OFF -DBUILD_CursesDialog=OFF -DBUILD_QtDialog=OFF -DCMAKE_USE_OPENSSL=OFF
 make
 '''
 install = '''

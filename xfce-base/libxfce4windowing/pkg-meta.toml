@@ -3,9 +3,9 @@ version = "4.20.7"
 category = "xfce-base"
 
 [dependencies]
-link = ["glib", "gtk3", "gdk-pixbuf", "libX11", "libXrandr", "libwnck", "libdisplay-info"]
-runtime = ["glibc", "glib", "gtk3", "gdk-pixbuf", "libX11", "libXrandr", "libwnck", "libdisplay-info"]
-build = ["pkgconf", "gettext", "xorgproto"]
+link = ["at-spi2-core", "cairo", "glib", "gtk3", "gdk-pixbuf", "harfbuzz", "pango", "libX11", "libXrandr", "libwnck", "libdisplay-info"]
+runtime = ["glibc", "at-spi2-core", "cairo", "glib", "gtk3", "gdk-pixbuf", "harfbuzz", "pango", "libX11", "libXrandr", "libwnck", "libdisplay-info"]
+build = ["pkgconf", "gettext", "xorgproto", "linux-headers"]
 
 [[source]]
 url = "https://archive.xfce.org/src/xfce/libxfce4windowing/4.20/libxfce4windowing-4.20.7.tar.bz2"

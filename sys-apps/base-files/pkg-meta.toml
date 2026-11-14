@@ -29,4 +29,53 @@ EOF
 ln -s /usr/lib/os-release "$PKGDIR/etc/os-release"
 ln -s /proc/self/mounts "$PKGDIR/etc/mtab"
 ln -s /run "$PKGDIR/var/run"
+printf '%s\n' /bin/sh /bin/bash > "$PKGDIR/etc/shells"
+
+cat > "$PKGDIR/etc/passwd" <<'EOF'
+root:x:0:0:root:/root:/bin/bash
+messagebus:x:1:1:messagebus:/var/lib/dbus:/bin/false
+nobody:x:65534:65534:nobody:/nonexistent:/bin/false
+EOF
+cat > "$PKGDIR/etc/group" <<'EOF'
+root:x:0:
+messagebus:x:1:
+tty:x:5:
+wheel:x:10:
+audio:x:18:
+video:x:27:
+input:x:97:
+storage:x:98:
+users:x:100:
+nogroup:x:65534:
+EOF
+cat > "$PKGDIR/etc/shadow" <<'EOF'
+root:*:0:0:99999:7:::
+messagebus:*:0:0:99999:7:::
+nobody:*:0:0:99999:7:::
+EOF
+cat > "$PKGDIR/etc/gshadow" <<'EOF'
+root:*::
+messagebus:*::
+tty:*::
+wheel:*::
+audio:*::
+video:*::
+input:*::
+storage:*::
+users:*::
+nogroup:*::
+EOF
+chmod 0600 "$PKGDIR/etc/shadow" "$PKGDIR/etc/gshadow"
+mkdir -p "$PKGDIR/var/lib/dbus"
+cat > "$PKGDIR/etc/nsswitch.conf" <<'EOF'
+passwd: files
+group: files
+shadow: files
+hosts: files dns
+networks: files
+protocols: files
+services: files
+ethers: files
+rpc: files
+EOF
 '''

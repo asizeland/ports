@@ -13,4 +13,4 @@ sha256 = "dc3abf533d66ae3db49e6783b0e1e29f0e4d045b4b3dac797a5e93be2735ec7b"
 
 [build]
 system = "autotools"
-configure_args = ["--disable-static", "--disable-imake", "--disable-setuid", "--disable-setgid", "--without-utempter", "--with-app-defaults=/usr/share/X11/app-defaults", "--enable-88-color", "--enable-256-color"]
+configure_args = ["--disable-static", "--disable-imake", "--disable-setuid", "--disable-setgid", "--without-utempter", "--with-app-defaults=/usr/share/X11/app-defaults", "--enable-88-color", "--enable-256-color", "ac_cv_func_initgroups=no"]

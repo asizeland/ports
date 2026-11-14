@@ -5,7 +5,7 @@ category = "sys-block"
 [dependencies]
 link = ["util-linux", "lvm2"]
 runtime = ["glibc", "util-linux", "lvm2"]
-build = ["pkgconf"]
+build = ["pkgconf", "linux-headers"]
 
 [[source]]
 url = "https://ftp.gnu.org/gnu/parted/parted-3.6.tar.xz"
@@ -20,7 +20,8 @@ tar xJf parted-3.6.tar.xz
 cd parted-3.6
 export PATH="/pkg/deps/pkgconf/usr/bin:$PATH"
 ./configure --prefix=/usr --libdir=/usr/lib --disable-static \
-    --disable-nls --without-readline --enable-device-mapper
+    --disable-nls --without-readline --enable-device-mapper \
+    CFLAGS="-O2 -Wno-error=incompatible-pointer-types"
 make
 '''
 install = '''

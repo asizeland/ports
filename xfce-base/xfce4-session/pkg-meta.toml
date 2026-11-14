@@ -3,9 +3,9 @@ version = "4.20.4"
 category = "xfce-base"
 
 [dependencies]
-link = ["glib", "gtk3", "libxfce4util", "libxfce4ui", "xfconf", "libxfce4windowing", "libX11", "libwnck", "libICE", "libSM", "polkit"]
-runtime = ["glibc", "glib", "gtk3", "libxfce4util", "libxfce4ui", "xfconf", "libxfce4windowing", "libX11", "libwnck", "libICE", "libSM", "polkit", "dbus", "upower", "iceauth", "xrdb", "xdg-user-dirs", "desktop-file-utils"]
-build = ["pkgconf", "gettext", "xorgproto", "iceauth"]
+link = ["at-spi2-core", "cairo", "gdk-pixbuf", "glib", "gtk3", "harfbuzz", "pango", "libxfce4util", "libxfce4ui", "xfconf", "libxfce4windowing", "libX11", "libwnck", "libICE", "libSM", "polkit"]
+runtime = ["glibc", "at-spi2-core", "cairo", "gdk-pixbuf", "glib", "gtk3", "harfbuzz", "pango", "libxfce4util", "libxfce4ui", "xfconf", "libxfce4windowing", "libX11", "libwnck", "libICE", "libSM", "polkit", "dbus", "upower", "iceauth", "xrdb", "xdg-user-dirs", "desktop-file-utils"]
+build = ["pkgconf", "gettext", "xorgproto", "iceauth", "linux-headers", "python3"]
 
 [hooks]
 operations = ["icon-cache", "desktop-database"]
@@ -17,3 +17,13 @@ sha256 = "805c373378d080754d69dd2f20db95cdc066c89a4f024a41435ca0d66571c402"
 [build]
 system = "autotools"
 configure_args = ["--sysconfdir=/etc", "--disable-static", "--enable-x11", "--disable-wayland", "--enable-legacy-sm", "--enable-polkit", "--disable-gtk-layer-shell", "--with-backend=linux", "--with-xsession-prefix=/usr"]
+
+[scripts]
+build = '''
+export GETTEXTDATADIRS="/pkg/deps/polkit/usr/share/gettext"
+export ICEAUTH=/usr/bin/iceauth
+./configure --prefix=/usr --sysconfdir=/etc --disable-static \
+    --enable-x11 --disable-wayland --enable-legacy-sm --enable-polkit \
+    --disable-gtk-layer-shell --with-backend=linux --with-xsession-prefix=/usr
+make
+'''

@@ -37,6 +37,7 @@ ninja -C dbus-build
 install = '''
 export PATH="/pkg/deps/ninja/usr/bin:/pkg/deps/python3/usr/bin:$PATH"
 DESTDIR="$PKGDIR" ninja -C dbus-build install
+chmod 4755 "$PKGDIR/usr/libexec/dbus-daemon-launch-helper"
 
 mkdir -p "$PKGDIR/etc/init.d"
 cat > "$PKGDIR/etc/init.d/dbus" <<'EOF'

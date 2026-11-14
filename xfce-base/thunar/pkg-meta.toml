@@ -3,9 +3,9 @@ version = "4.20.10"
 category = "xfce-base"
 
 [dependencies]
-link = ["glib", "gtk3", "gdk-pixbuf", "pango", "exo", "libxfce4util", "libxfce4ui", "xfconf", "libX11", "libICE", "libSM", "libgudev", "libnotify", "pcre2"]
-runtime = ["glibc", "glib", "gtk3", "gdk-pixbuf", "pango", "exo", "libxfce4util", "libxfce4ui", "xfconf", "libX11", "libICE", "libSM", "libgudev", "libnotify", "pcre2", "dbus", "gvfs", "udisks", "shared-mime-info", "desktop-file-utils"]
-build = ["pkgconf", "gettext", "xorgproto"]
+link = ["at-spi2-core", "cairo", "glib", "gtk3", "gdk-pixbuf", "harfbuzz", "pango", "exo", "libxfce4util", "libxfce4ui", "xfconf", "libX11", "libICE", "libSM", "libgudev", "libnotify", "pcre2"]
+runtime = ["glibc", "at-spi2-core", "cairo", "glib", "gtk3", "gdk-pixbuf", "harfbuzz", "pango", "exo", "libxfce4util", "libxfce4ui", "xfconf", "libX11", "libICE", "libSM", "libgudev", "libnotify", "pcre2", "dbus", "gvfs", "udisks", "shared-mime-info", "desktop-file-utils"]
+build = ["pkgconf", "gettext", "xorgproto", "linux-headers"]
 
 [hooks]
 operations = ["icon-cache", "desktop-database"]

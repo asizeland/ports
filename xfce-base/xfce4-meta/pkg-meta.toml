@@ -41,3 +41,6 @@ runtime = [
 
 [build]
 system = "none"
+
+[scripts]
+install = ":"

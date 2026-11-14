@@ -4,6 +4,7 @@ category = "sys-apps"
 
 [dependencies]
 runtime = ["glibc"]
+build = ["linux-headers"]
 
 [[source]]
 url = "https://git.kernel.org/pub/scm/linux/kernel/git/dhowells/keyutils.git/snapshot/keyutils-1.6.3.tar.gz"
@@ -21,4 +22,5 @@ make -C keyutils-1.6.3 LIBDIR=/usr/lib USRLIBDIR=/usr/lib \
 install = '''
 make -C keyutils-1.6.3 LIBDIR=/usr/lib USRLIBDIR=/usr/lib \
     BINDIR=/usr/bin SBINDIR=/usr/sbin NO_ARLIB=1 DESTDIR="$PKGDIR" install
+ln -sfn libkeyutils.so.1 "$PKGDIR/usr/lib/libkeyutils.so"
 '''

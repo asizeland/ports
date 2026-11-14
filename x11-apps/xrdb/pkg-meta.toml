@@ -3,9 +3,9 @@ version = "1.2.3"
 category = "x11-apps"
 
 [dependencies]
-link = ["libX11", "libXmu"]
+link = ["libX11", "libXmu", "gcc"]
 runtime = ["glibc", "libX11", "libXmu", "gcc"]
-build = ["xorgproto", "pkgconf"]
+build = ["xorgproto", "pkgconf", "linux-headers"]
 
 [[source]]
 url = "https://www.x.org/releases/individual/app/xrdb-1.2.3.tar.xz"

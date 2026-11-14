@@ -3,9 +3,9 @@ version = "4.20.0"
 category = "xfce-base"
 
 [dependencies]
-link = ["glib", "gtk3", "libxfce4util", "libxfce4ui", "xfconf", "garcon"]
-runtime = ["glibc", "glib", "gtk3", "libxfce4util", "libxfce4ui", "xfconf", "garcon", "desktop-file-utils"]
-build = ["pkgconf", "gettext"]
+link = ["cairo", "gdk-pixbuf", "glib", "gtk3", "libxfce4util", "libxfce4ui", "xfconf", "garcon"]
+runtime = ["glibc", "cairo", "gdk-pixbuf", "glib", "gtk3", "libxfce4util", "libxfce4ui", "xfconf", "garcon", "desktop-file-utils"]
+build = ["pkgconf", "gettext", "linux-headers", "xorgproto"]
 
 [hooks]
 operations = ["icon-cache", "desktop-database"]

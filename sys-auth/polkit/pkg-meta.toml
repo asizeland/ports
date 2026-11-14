@@ -24,7 +24,7 @@ meson setup polkit-128 polkit-build \
     -Dauthfw=pam -Dpam_prefix=/etc/pam.d -Dpam_include=system-auth \
     -Dos_type=lfs -Dprivileged_group=wheel \
     -Dsession_tracking=ConsoleKit -Dsystemdsystemunitdir=/usr/lib/systemd/system \
-    -Dpolkitd_user=polkitd -Dintrospection=false -Dtests=false -Dexamples=false \
+    -Dpolkitd_user=root -Dintrospection=false -Dtests=false -Dexamples=false \
     -Dgtk_doc=false -Dman=false -Dgettext=false
 ninja -C polkit-build
 '''

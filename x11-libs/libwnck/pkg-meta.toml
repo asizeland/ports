@@ -3,8 +3,8 @@ version = "43.3"
 category = "x11-libs"
 
 [dependencies]
-link = ["cairo", "glib", "gtk3", "libX11", "libXres", "libXi", "startup-notification"]
-runtime = ["glibc", "cairo", "glib", "gtk3", "libX11", "libXres", "libXi", "startup-notification"]
+link = ["at-spi2-core", "cairo", "gdk-pixbuf", "glib", "gtk3", "pango", "libX11", "libXres", "libXi", "libXrender", "startup-notification"]
+runtime = ["glibc", "at-spi2-core", "cairo", "gdk-pixbuf", "glib", "gtk3", "pango", "libX11", "libXres", "libXi", "libXrender", "startup-notification"]
 build = ["meson", "ninja", "python3", "pkgconf", "gettext", "xorgproto"]
 
 [[source]]

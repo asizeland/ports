@@ -5,6 +5,7 @@ category = "sys-apps"
 [dependencies]
 link = ["ncurses"]
 runtime = ["glibc", "ncurses"]
+build = ["linux-headers"]
 
 [[source]]
 url = "https://downloads.sourceforge.net/project/psmisc/psmisc/psmisc-23.7.tar.xz"

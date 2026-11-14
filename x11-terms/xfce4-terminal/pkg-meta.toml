@@ -3,8 +3,8 @@ version = "1.2.0"
 category = "x11-terms"
 
 [dependencies]
-link = ["glib", "gtk3", "vte", "pcre2", "libxfce4util", "libxfce4ui", "xfconf", "libX11"]
-runtime = ["glibc", "glib", "gtk3", "vte", "pcre2", "libxfce4util", "libxfce4ui", "xfconf", "libX11", "dbus", "desktop-file-utils"]
+link = ["at-spi2-core", "cairo", "gdk-pixbuf", "glib", "gtk3", "pango", "vte", "pcre2", "libxfce4util", "libxfce4ui", "xfconf", "libX11"]
+runtime = ["glibc", "at-spi2-core", "cairo", "gdk-pixbuf", "glib", "gtk3", "pango", "vte", "pcre2", "libxfce4util", "libxfce4ui", "xfconf", "libX11", "dbus", "desktop-file-utils"]
 build = ["meson", "ninja", "python3", "pkgconf", "gettext", "xorgproto"]
 
 [hooks]
@@ -17,3 +17,11 @@ sha256 = "6874c7b975cc3dc3bd636d57ffec723de7458202defe65377593d3a7e0734b94"
 [build]
 system = "meson"
 configure_args = ["--sysconfdir=/etc", "-Dx11=enabled", "-Dwayland=disabled", "-Dgtk-layer-shell=disabled", "-Dlibutempter=disabled", "-Ddoc=false"]
+
+[scripts]
+prepare = '''
+sed -i \
+    -e '/if (dropdown->set_monitor_idle_id != 0)/i #ifdef HAVE_GTK_LAYER_SHELL' \
+    -e '/g_source_remove (dropdown->monitor_removed_idle_id);/a #endif' \
+    terminal/terminal-window-dropdown.c
+'''

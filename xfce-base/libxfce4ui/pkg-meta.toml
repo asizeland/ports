@@ -3,9 +3,9 @@ version = "4.20.2"
 category = "xfce-base"
 
 [dependencies]
-link = ["glib", "gtk3", "libxfce4util", "xfconf", "libX11", "libICE", "libSM", "startup-notification"]
-runtime = ["glibc", "glib", "gtk3", "libxfce4util", "xfconf", "libX11", "libICE", "libSM", "startup-notification", "desktop-file-utils"]
-build = ["pkgconf", "gettext", "xorgproto"]
+link = ["at-spi2-core", "cairo", "gdk-pixbuf", "glib", "gtk3", "harfbuzz", "pango", "libxfce4util", "xfconf", "libX11", "libICE", "libSM", "startup-notification"]
+runtime = ["glibc", "at-spi2-core", "cairo", "gdk-pixbuf", "glib", "gtk3", "harfbuzz", "pango", "libxfce4util", "xfconf", "libX11", "libICE", "libSM", "startup-notification", "desktop-file-utils"]
+build = ["pkgconf", "gettext", "xorgproto", "linux-headers"]
 
 [hooks]
 operations = ["icon-cache", "desktop-database"]

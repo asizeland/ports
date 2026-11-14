@@ -5,7 +5,7 @@ category = "sys-fs"
 [dependencies]
 link = ["lvm2", "json-c", "openssl", "util-linux", "popt", "keyutils", "eudev"]
 runtime = ["glibc", "lvm2", "json-c", "openssl", "util-linux", "popt", "keyutils", "eudev"]
-build = ["pkgconf"]
+build = ["pkgconf", "linux-headers"]
 
 [[source]]
 url = "https://cdn.kernel.org/pub/linux/utils/cryptsetup/v2.8/cryptsetup-2.8.8.tar.xz"

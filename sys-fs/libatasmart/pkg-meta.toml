@@ -5,7 +5,7 @@ category = "sys-fs"
 [dependencies]
 link = ["eudev"]
 runtime = ["glibc", "eudev"]
-build = ["pkgconf"]
+build = ["pkgconf", "linux-headers"]
 
 [[source]]
 url = "https://0pointer.de/public/libatasmart-0.19.tar.xz"

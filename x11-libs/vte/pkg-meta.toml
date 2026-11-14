@@ -3,9 +3,9 @@ version = "0.74.2"
 category = "x11-libs"
 
 [dependencies]
-link = ["gcc", "cairo", "fribidi", "glib", "gnutls", "gtk3", "pango", "pcre2", "zlib"]
-runtime = ["glibc", "gcc", "cairo", "fribidi", "glib", "gnutls", "gtk3", "pango", "pcre2", "zlib"]
-build = ["meson", "ninja", "python3", "pkgconf", "gettext"]
+link = ["at-spi2-core", "gcc", "cairo", "fribidi", "gdk-pixbuf", "glib", "gnutls", "gtk3", "pango", "pcre2", "zlib"]
+runtime = ["glibc", "at-spi2-core", "gcc", "cairo", "fribidi", "gdk-pixbuf", "glib", "gnutls", "gtk3", "pango", "pcre2", "zlib"]
+build = ["meson", "ninja", "python3", "pkgconf", "gettext", "linux-headers", "xorgproto"]
 
 [[source]]
 url = "https://download.gnome.org/sources/vte/0.74/vte-0.74.2.tar.xz"
