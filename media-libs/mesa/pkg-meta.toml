@@ -1,15 +1,19 @@
 name = "mesa"
-version = "24.3.4"
+version = "24.3.4-r1"
 category = "media-libs"
 
 [dependencies]
 link = ["gcc", "libglvnd", "libdrm", "expat", "zlib", "zstd", "libX11", "libXext", "libXfixes", "libXrandr", "libXxf86vm", "libxcb", "libxshmfence"]
 runtime = ["glibc", "gcc", "libglvnd", "libdrm", "expat", "zlib", "zstd", "libX11", "libXext", "libXfixes", "libXrandr", "libXxf86vm", "libxcb", "libxshmfence"]
-build = ["meson", "ninja", "python3", "mako", "markupsafe", "packaging", "pyyaml", "pkgconf", "bison", "flex", "xorgproto", "linux-headers"]
+build = ["meson", "ninja", "python3", "mako", "markupsafe", "packaging", "pyyaml", "pkgconf", "bison", "flex", "patch", "xorgproto", "linux-headers"]
 
 [[source]]
 url = "https://archive.mesa3d.org/mesa-24.3.4.tar.xz"
 sha256 = "e641ae27191d387599219694560d221b7feaa91c900bcec46bf444218ed66025"
+
+[[source]]
+url = "https://gitlab.freedesktop.org/mesa/mesa/-/commit/179e744f7577d98df7c79d7324c22acfb32a0154.patch"
+sha256 = "73cfb3dedafe937996b171c55082d6317cf62e4371f6c1146c2d2a902cf7060b"
 
 [build]
 system = "custom"
@@ -17,6 +21,7 @@ system = "custom"
 [scripts]
 build = '''
 tar xJf mesa-24.3.4.tar.xz
+patch -d mesa-24.3.4 -p1 < 179e744f7577d98df7c79d7324c22acfb32a0154.patch
 export PATH="/pkg/deps/meson/usr/bin:/pkg/deps/ninja/usr/bin:/pkg/deps/python3/usr/bin:/pkg/deps/pkgconf/usr/bin:$PATH"
 export PYTHONPATH="/pkg/deps/mako/usr/lib/python3.13/site-packages:/pkg/deps/markupsafe/usr/lib/python3.13/site-packages:/pkg/deps/packaging/usr/lib/python3.13/site-packages:/pkg/deps/pyyaml/usr/lib/python3.13/site-packages"
 meson setup mesa-24.3.4 mesa-build \

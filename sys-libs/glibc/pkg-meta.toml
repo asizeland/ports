@@ -1,13 +1,13 @@
 name = "glibc"
-version = "2.42"
+version = "2.43"
 category = "sys-libs"
 
 [dependencies]
 build = ["linux-headers"]
 
 [[source]]
-url = "https://ftpmirror.gnu.org/gnu/glibc/glibc-2.42.tar.xz"
-sha256 = "d1775e32e4628e64ef930f435b67bb63af7599acb6be2b335b9f19f16509f17f"
+url = "https://ftpmirror.gnu.org/gnu/glibc/glibc-2.43.tar.xz"
+sha256 = "d9c86c6b5dbddb43a3e08270c5844fc5177d19442cf5b8df4be7c07cd5fa3831"
 
 [build]
 system = "custom"
@@ -21,7 +21,7 @@ build = '''
 # profile mix-in: the profile cannot change these bits.
 export CFLAGS="-O2"
 export CXXFLAGS="-O2"
-tar xJf glibc-2.42.tar.xz
+tar xJf glibc-2.43.tar.xz
 mkdir -p glibc-build
 cd glibc-build
 # slibdir=/usr/lib: runtime DSOs (libc.so.6, libm, ...) land in
@@ -32,7 +32,7 @@ cd glibc-build
 # name /lib64/ld-linux-x86-64.so.2 (elf/Makefile), which is exactly
 # what every dynamically linked x86-64 binary asks the kernel for.
 echo "slibdir=/usr/lib" > configparms
-../glibc-2.42/configure --prefix=/usr --libdir=/usr/lib \
+../glibc-2.43/configure --prefix=/usr --libdir=/usr/lib \
     --with-headers=/pkg/deps/linux-headers/usr/include \
     --enable-kernel=6.1 --disable-werror --disable-profile \
     --without-gd --without-selinux
