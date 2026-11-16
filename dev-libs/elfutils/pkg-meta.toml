@@ -1,5 +1,5 @@
 name = "elfutils"
-version = "0.193"
+version = "0.195"
 category = "dev-libs"
 
 [dependencies]
@@ -8,16 +8,16 @@ runtime = ["glibc", "gcc", "zlib"]
 build = ["gcc", "make", "linux-headers", "pkgconf"]
 
 [[source]]
-url = "https://sourceware.org/elfutils/ftp/0.193/elfutils-0.193.tar.bz2"
-sha256 = "7857f44b624f4d8d421df851aaae7b1402cfe6bcdd2d8049f15fc07d3dde7635"
+url = "https://sourceware.org/elfutils/ftp/0.195/elfutils-0.195.tar.bz2"
+sha256 = "37629fdf7f1f3dc2818e138fca2b8094177d6c2d0f701d3bb650a561218dc026"
 
 [build]
 system = "custom"
 
 [scripts]
 build = '''
-tar xjf elfutils-0.193.tar.bz2
-cd elfutils-0.193
+tar xjf elfutils-0.195.tar.bz2
+cd elfutils-0.195
 export PATH="/pkg/deps/pkgconf/usr/bin:$PATH"
 ./configure --prefix=/usr --libdir=/usr/lib \
     --disable-debuginfod --disable-libdebuginfod \
@@ -25,5 +25,5 @@ export PATH="/pkg/deps/pkgconf/usr/bin:$PATH"
 make
 '''
 install = '''
-make -C elfutils-0.193 DESTDIR="$PKGDIR" install
+make -C elfutils-0.195 DESTDIR="$PKGDIR" install
 '''

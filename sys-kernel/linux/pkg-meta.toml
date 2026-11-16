@@ -38,6 +38,7 @@ scripts/config --set-str LOCALVERSION "-yakimo" --disable LOCALVERSION_AUTO \
     --enable VIRTIO --enable VIRTIO_PCI --enable VIRTIO_BLK \
     --enable VIRTIO_NET --enable VIRTIO_CONSOLE \
     --enable DRM --enable DRM_FBDEV_EMULATION \
+    --module CFG80211 --module MAC80211 \
     --enable UNWINDER_FRAME_POINTER --disable UNWINDER_ORC \
     --disable X86_KERNEL_IBT --disable DEBUG_INFO --disable DEBUG_INFO_BTF \
     --disable MODULE_SIG --disable MODULE_SIG_FORCE --disable MODULE_SIG_ALL \
@@ -48,6 +49,12 @@ for option in MODULES DEVTMPFS DEVTMPFS_MOUNT EXT4_FS BLK_DEV_NVME \
               SATA_AHCI MICROCODE VIRTIO_BLK SERIAL_8250_CONSOLE DRM; do
     grep -q "^CONFIG_${option}=y$" .config || {
         echo "required kernel option CONFIG_${option}=y is missing" >&2
+        exit 1
+    }
+done
+for option in CFG80211 MAC80211; do
+    grep -q "^CONFIG_${option}=m$" .config || {
+        echo "required kernel option CONFIG_${option}=m is missing" >&2
         exit 1
     }
 done

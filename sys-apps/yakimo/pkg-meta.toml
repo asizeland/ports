@@ -1,0 +1,32 @@
+name = "yakimo"
+version = "0.1.0"
+category = "sys-apps"
+
+[dependencies]
+runtime = ["bubblewrap"]
+
+[[source]]
+url = "https://github.com/asizeland/Yaki-Imo/releases/download/v0.1.0/pkg"
+sha256 = "dae38e1e04cd145dde260f6009199bf01baad187a70c540ff06dd02afde13064"
+filename = "pkg"
+
+[[source]]
+url = "https://github.com/asizeland/Yaki-Imo/releases/download/v0.1.0/glibc-apply"
+sha256 = "9c1314bfaf7c60fc9f04da5d28592c3b8a137d9dc249f3e24b331ff8242d750b"
+filename = "glibc-apply"
+
+[[source]]
+url = "https://raw.githubusercontent.com/asizeland/Yaki-Imo/v0.1.0/LICENSE"
+sha256 = "161dfc8d1eb076ef315762b989901b110aa78c4dd44894b6f17c3c16a5cf4e2e"
+filename = "LICENSE"
+
+[build]
+binary = true
+system = "custom"
+
+[scripts]
+install = '''
+install -Dm755 pkg "$PKGDIR/usr/bin/pkg"
+install -Dm755 glibc-apply "$PKGDIR/usr/lib/pkg/glibc-apply"
+install -Dm644 LICENSE "$PKGDIR/usr/share/licenses/yakimo/LICENSE"
+'''

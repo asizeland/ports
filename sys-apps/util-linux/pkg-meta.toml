@@ -23,6 +23,10 @@ system = "custom"
 build = '''
 tar xJf util-linux-2.41.1.tar.xz
 cd util-linux-2.41.1
+# Upstream 711bda144156: keep the compound-literal comma out of glibc's
+# C23 bsearch macro argument parser.
+sed -i 's/bsearch(&(struct pollfd){\.fd = fd,}, local/bsearch((\&(struct pollfd){.fd = fd,}), local/' \
+    lsfd-cmd/lsfd.c
 # tools/all_errnos + all_syscalls ship with #!/bin/bash, and /bin/bash
 # does not exist in the build sandbox — repoint them at the farm bash.
 sed -i '1s|^#!/bin/bash|#!/usr/bin/bash|' tools/all_errnos tools/all_syscalls

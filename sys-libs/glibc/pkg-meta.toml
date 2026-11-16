@@ -37,6 +37,12 @@ echo "slibdir=/usr/lib" > configparms
     --enable-kernel=6.1 --disable-werror --disable-profile \
     --without-gd --without-selinux
 make
+# ldconfig is linked statically so activation can run it on a foreign
+# host. A compiler wrapper must not stamp a dynamic interpreter onto it.
+if readelf -l glibc-build/elf/ldconfig | grep -q INTERP; then
+    echo "ldconfig unexpectedly has a dynamic interpreter" >&2
+    exit 1
+fi
 '''
 install = '''
 make -C glibc-build DESTDIR="$PKGDIR" install
@@ -50,5 +56,5 @@ rm -f "$PKGDIR/etc/ld.so.cache"
 # cache resolves libc.so.6 & co. to THIS glibc — loader and libc stay a
 # consistent pair and foreign binaries keep working via forward compat.
 mkdir -p "$PKGDIR/etc/ld.so.conf.d"
-printf '/usr/lib\n/usr/lib64\n' > "$PKGDIR/etc/ld.so.conf.d/00-yakimo-glibc.conf"
+printf '/usr/lib\n' > "$PKGDIR/etc/ld.so.conf.d/00-yakimo-glibc.conf"
 '''

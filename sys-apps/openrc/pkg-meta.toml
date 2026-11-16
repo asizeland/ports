@@ -41,6 +41,10 @@ ninja -C openrc-build
 install = '''
 export PATH="/pkg/deps/ninja/usr/bin:/pkg/deps/python3/usr/bin:$PATH"
 DESTDIR="$PKGDIR" ninja -C openrc-build install
+# The tree does not need a separate net-tools package solely to set the
+# kernel hostname. OpenRC's service already runs as root on Linux.
+sed -i 's|hostname "$h"|printf "%s" "$h" > /proc/sys/kernel/hostname|' \
+    "$PKGDIR/etc/init.d/hostname"
 
 # Upstream populates the standard runlevels. Keep the service definitions,
 # but leave all runlevel selection to the system administrator.

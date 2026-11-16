@@ -1,0 +1,27 @@
+# Downloaded sources, generated repositories, and local test output.
+/distfiles/
+/out/
+/repo/
+*.raw
+*.qcow2
+*.img
+*.iso
+*.log
+*.pid
+*.sock
+
+# Machine-local credentials and connection profiles.
+.env
+.env.*
+!.env.example
+secrets/
+authorized_keys
+known_hosts
+id_rsa*
+id_ed25519*
+*.key
+*.pem
+*.p12
+*.pfx
+*.kdbx
+*.ovpn

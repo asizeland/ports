@@ -25,6 +25,9 @@ system = "custom"
 [scripts]
 build = '''
 tar xJf gcc-15.2.0.tar.xz
+# Upstream libgomp fix for glibc's C23 const-preserving strchr macro.
+sed -i 's/char \*q = strchr (p + 1/const char *q = strchr (p + 1/' \
+    gcc-15.2.0/libgomp/affinity-fmt.c
 # Native build in the sandbox has no /usr/include: fixincludes and the
 # target runtime libraries (libgcc, libstdc++) need the target system
 # headers. Assemble a build sysroot from the packaged glibc + kernel
@@ -70,7 +73,7 @@ make -C gcc-build DESTDIR="$PKGDIR" install
 # lib64 into lib and leave a compat symlink behind — gcc's own driver
 # still probes lib64 at link time.
 if [ -d "$PKGDIR/usr/lib64" ]; then
-    cp -rl "$PKGDIR/usr/lib64/." "$PKGDIR/usr/lib/"
+    cp -al "$PKGDIR/usr/lib64/." "$PKGDIR/usr/lib/"
     rm -rf "$PKGDIR/usr/lib64"
     ln -s lib "$PKGDIR/usr/lib64"
 fi
