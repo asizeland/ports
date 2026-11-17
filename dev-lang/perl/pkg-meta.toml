@@ -9,6 +9,7 @@ sha256 = "e093ef184d7f9a1b9797e2465296f55510adb6dab8842b0c3ed53329663096dc"
 [dependencies]
 link = ["libxcrypt"]
 runtime = ["glibc", "libxcrypt"]
+build = ["gcc", "make", "binutils", "linux-headers"]
 
 [build]
 system = "custom"
@@ -17,10 +18,13 @@ system = "custom"
 build = '''
 tar xzf perl-5.42.0.tar.gz
 cd perl-5.42.0
+export PATH="/pkg/deps/gcc/usr/bin:/pkg/deps/binutils/usr/bin:/pkg/deps/make/usr/bin:$PATH"
 ./Configure -des \
+    -Dcc=gcc \
     -Dprefix=/usr \
     -Dvendorprefix=/usr \
     -Dsiteprefix=/usr/local \
+    -Dlibs='-lpthread -ldl -lm -lcrypt -lutil -lc' \
     -Dnoextensions='DB_File GDBM_File NDBM_File ODBM_File' \
     -Dman1dir=/usr/share/man/man1 \
     -Dman3dir=/usr/share/man/man3
