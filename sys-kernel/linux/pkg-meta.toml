@@ -6,7 +6,7 @@ provides = ["virtual/kernel"]
 [dependencies]
 link = ["glibc", "openssl", "elfutils", "binutils"]
 runtime = ["glibc", "openssl", "elfutils", "binutils", "kmod"]
-build = ["gcc", "make", "binutils", "linux-headers", "bc", "bison", "flex", "openssl", "elfutils"]
+build = ["gcc", "make", "binutils", "linux-headers", "bc", "bison", "flex", "openssl", "elfutils", "perl"]
 
 [[source]]
 url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.19.14.tar.xz"
@@ -19,7 +19,7 @@ system = "custom"
 build = '''
 tar xJf linux-6.19.14.tar.xz
 cd linux-6.19.14
-export PATH="/pkg/deps/gcc/usr/bin:/pkg/deps/binutils/usr/bin:/pkg/deps/make/usr/bin:/pkg/deps/bc/usr/bin:/pkg/deps/bison/usr/bin:/pkg/deps/flex/usr/bin:/pkg/deps/openssl/usr/bin:$PATH"
+export PATH="/pkg/deps/gcc/usr/bin:/pkg/deps/binutils/usr/bin:/pkg/deps/make/usr/bin:/pkg/deps/bc/usr/bin:/pkg/deps/bison/usr/bin:/pkg/deps/flex/usr/bin:/pkg/deps/openssl/usr/bin:/pkg/deps/perl/usr/bin:$PATH"
 export KBUILD_BUILD_USER=builder KBUILD_BUILD_HOST=yakimo
 export BISON_PKGDATADIR=/pkg/deps/bison/usr/share/bison
 
@@ -62,7 +62,7 @@ make bzImage modules
 '''
 install = '''
 cd linux-6.19.14
-export PATH="/pkg/deps/gcc/usr/bin:/pkg/deps/binutils/usr/bin:/pkg/deps/make/usr/bin:/pkg/deps/bc/usr/bin:/pkg/deps/bison/usr/bin:/pkg/deps/flex/usr/bin:/pkg/deps/openssl/usr/bin:$PATH"
+export PATH="/pkg/deps/gcc/usr/bin:/pkg/deps/binutils/usr/bin:/pkg/deps/make/usr/bin:/pkg/deps/bc/usr/bin:/pkg/deps/bison/usr/bin:/pkg/deps/flex/usr/bin:/pkg/deps/openssl/usr/bin:/pkg/deps/perl/usr/bin:$PATH"
 KREL=$(make -s kernelrelease)
 
 mkdir -p "$PKGDIR/boot" "$PKGDIR/usr/lib/modules" "$PKGDIR/usr/src"
